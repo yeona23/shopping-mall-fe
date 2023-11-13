@@ -8,10 +8,6 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Cart from './pages/Cart/Cart';
 import Users from './pages/Users/Users';
-import Products from './pages/Products/Products';
-import Product from './pages/Product/Product';
-import Seller from './pages/Seller/Seller';
-import User from './pages/User/User';
 
 const router = createBrowserRouter([
 	{
@@ -20,32 +16,23 @@ const router = createBrowserRouter([
 		children: [
 			{ index: true, element: <Home /> },
 			{
-				path: 'login',
+				path: '/login',
 				element: <Login />,
 			},
 			{
-				path: 'register',
+				path: '/register',
 				element: <Register />,
 			},
 			{
-				path: 'users/:id',
+				path: '/users',
 				element: <Users />,
-				children: [
-					{ index: true, element: <User /> },
-					{ path: 'seller', element: <Seller /> },
-				],
 			},
 			{
-				path: 'cart',
+				path: '/cart',
 				element: <Cart />,
 			},
 			{
-				path: 'products',
-				element: <Products />,
-			},
-			{
-				path: 'product/:productId',
-				element: <Product />,
+				path: '',
 			},
 		],
 	},

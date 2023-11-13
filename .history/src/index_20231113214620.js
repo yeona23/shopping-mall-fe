@@ -11,7 +11,6 @@ import Users from './pages/Users/Users';
 import Products from './pages/Products/Products';
 import Product from './pages/Product/Product';
 import Seller from './pages/Seller/Seller';
-import User from './pages/User/User';
 
 const router = createBrowserRouter([
 	{
@@ -30,10 +29,7 @@ const router = createBrowserRouter([
 			{
 				path: 'users/:id',
 				element: <Users />,
-				children: [
-					{ index: true, element: <User /> },
-					{ path: 'seller', element: <Seller /> },
-				],
+				children: [{ path: 'seller', element: <Seller /> }],
 			},
 			{
 				path: 'cart',
