@@ -6,5 +6,4 @@ export const ProductSection = styled.section`
 	margin: auto;
 	margin-top: 120px;
 	margin-bottom: 80px;
-	border: 1px solid var(--color-main-text);
 `;
