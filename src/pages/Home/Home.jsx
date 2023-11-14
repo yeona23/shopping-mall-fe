@@ -1,5 +1,11 @@
+import MainSwiper from '../../components/Swiper/MainSwiper';
+
 const Home = () => {
-	return <>HOME</>;
+	return (
+		<>
+			<MainSwiper />
+		</>
+	);
 };
 
 export default Home;
