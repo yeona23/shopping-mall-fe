@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CartDiv = styled.div`
 	max-width: 1320px;
-	margin: auto;
+	margin: 80px auto 200px auto;
 `;
 export const CartTitleDiv = styled.div`
 	padding: 24px 0;
