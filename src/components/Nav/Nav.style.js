@@ -4,6 +4,8 @@ export const Header = styled.div`
 	width: 100%;
 	background: #ede1d250;
 	position: fixed;
+	top: 0;
+	left: 0;
 	z-index: 10000;
 `;
 
