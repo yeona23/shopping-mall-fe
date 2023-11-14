@@ -20,7 +20,7 @@ const Cart = () => {
 					<CartItem />
 					<CartItem />
 				</CartItemsDiv>
-				<CartSummary />
+				<CartSummary btnText="Checkout" />
 			</CartContentsDiv>
 		</CartDiv>
 	);

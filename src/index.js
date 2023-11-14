@@ -14,6 +14,7 @@ import Seller from './pages/Seller/Seller';
 import User from './pages/User/User/User';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import Order from './pages/Order/Order';
 
 const router = createBrowserRouter([
 	{
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
 			{
 				path: 'cart',
 				element: <Cart />,
+			},
+			{
+				path: 'order',
+				element: <Order />,
 			},
 			{
 				path: 'products',

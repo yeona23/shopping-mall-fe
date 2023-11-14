@@ -6,10 +6,11 @@ import {
 } from './CartSummary.style';
 import Button from '../CartUI/Button';
 
-const CartSummary = () => {
+const CartSummary = ({ children, btnText }) => {
 	return (
 		<CartSummaryDiv>
 			<CartSummaryTitleH3>Cart Summary</CartSummaryTitleH3>
+			{children}
 			<CartSummaryOptionDiv>
 				<p>Subtotal</p>
 				<em>₩104,000</em>
@@ -26,7 +27,7 @@ const CartSummary = () => {
 				<p>TOTAL</p>
 				<em>₩101,600</em>
 			</CartSummaryOptionDiv>
-      <Button size='100%'>Checkout</Button>
+			<Button size="100%">{btnText}</Button>
 		</CartSummaryDiv>
 	);
 };
