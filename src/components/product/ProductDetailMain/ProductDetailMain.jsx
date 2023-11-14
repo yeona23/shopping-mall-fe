@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Mousewheel } from 'swiper/modules';
 import {
 	AddedItemWrap,
 	BasePrice,
@@ -37,16 +41,48 @@ const ProductDetailMain = () => {
 	return (
 		<MainWrap>
 			<ImgArticle>
-				<ImgWrap>
-					<img src="/assets/main1.jpg" alt="" />
-				</ImgWrap>
+				<Swiper
+					loop={false}
+					slidesPerView={1}
+					grabCursor={true}
+					allowTouchMove={true}
+					cssMode={false}
+					navigation={true}
+					modules={[Navigation, Mousewheel]}
+					mousewheel={{ forceToAxis: true }}
+					className="swiper">
+					{images &&
+						images.map((image, index) => (
+							<SwiperSlide key={index}>
+								<ImgWrap>
+									<img src={image.src} alt={image.alt} />
+								</ImgWrap>
+							</SwiperSlide>
+						))}
+				</Swiper>
 				<ImgListWrap>
 					<ul>
-						{images.map((image, index) => (
-							<ImageItem key={index}>
-								<img src={image.src} alt={image.alt} />
-							</ImageItem>
-						))}
+						<Swiper
+							loop={false}
+							spaceBetween={5}
+							slidesPerView={5}
+							slidesPerGroup={5}
+							grabCursor={true}
+							allowTouchMove={true}
+							cssMode={false}
+							navigation={true}
+							modules={[Navigation, Mousewheel]}
+							mousewheel={{ forceToAxis: true }}
+							className="swiper">
+							{images &&
+								images.map((image, index) => (
+									<SwiperSlide key={index}>
+										<ImageItem>
+											<img src={image.src} alt={image.alt} />
+										</ImageItem>
+									</SwiperSlide>
+								))}
+						</Swiper>
 					</ul>
 				</ImgListWrap>
 			</ImgArticle>
