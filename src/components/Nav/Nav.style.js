@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 export const Header = styled.div`
 	width: 100%;
 	background: #ede1d250;
+	backdrop-filter: blur(5px);
 	position: fixed;
 	top: 0;
 	left: 0;
