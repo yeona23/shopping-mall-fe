@@ -102,27 +102,6 @@ const Register = () => {
 			<RegisterDiv>
 				<RegisterTitleDiv>SIGN UP</RegisterTitleDiv>
 				<RegisterForm>
-					<ProfileImgDiv>
-						<ProfileImg
-							src={
-								imgFile ? imgFile : `/images/icon/user.png` || defaultUserImage
-							}
-							alt=""
-						/>
-					</ProfileImgDiv>
-					<ProfileImgLabel
-						className="signup-profileImg-label"
-						htmlFor="profileImg">
-						Profile Image select
-					</ProfileImgLabel>
-					<ProfileImgInput
-						className="signup-profileImg-input"
-						type="file"
-						accept="image/*"
-						id="profileImg"
-						onChange={saveImgFile}
-						ref={imgRef}
-					/>
 					<RegisterInput
 						type="text"
 						placeholder="NAME"
@@ -133,11 +112,7 @@ const Register = () => {
 						placeholder="PHONE NUMBER"
 						name="phoneNumber"
 						onChange={inputValueHandler}></RegisterInput>
-					<RegisterInput
-						type="text"
-						placeholder="ADDRESS"
-						name="phoneNumber"
-						onChange={inputValueHandler}></RegisterInput>
+
 					<RegisterInput
 						placeholder="ID"
 						type="email"
