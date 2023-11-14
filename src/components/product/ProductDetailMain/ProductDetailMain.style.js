@@ -4,10 +4,67 @@ export const MainWrap = styled.div`
 	display: flex;
 	align-items: start;
 	padding: 10px;
+
+	.swiper-button-prev {
+		background-color: rgba(199, 209, 201, 0.3);
+		opacity: 1;
+		color: #ffffff;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+	}
+	.swiper-button-prev:hover {
+		color: #000000;
+	}
+	.swiper-button-next {
+		background-color: rgba(199, 209, 201, 0.3);
+		opacity: 1;
+		color: #ffffff;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+	}
+	.swiper-button-next:hover {
+		color: #000000;
+	}
+
+	.swiper-button-prev:after,
+	.swiper-button-next:after {
+		font-size: 1rem;
+		font-weight: 600;
+	}
 `;
 
 export const ImgArticle = styled.article`
 	width: 50%;
+
+	
+	.swiper-button-prev {
+		opacity: 1;
+		color: #ffffff;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+	}
+	.swiper-button-prev:hover {
+		color: #000000;
+	}
+	.swiper-button-next {
+		opacity: 1;
+		color: #ffffff;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+	}
+	.swiper-button-next:hover {
+		color: #000000;
+	}
+
+	.swiper-button-prev:after,
+	.swiper-button-next:after {
+		font-size: 1rem;
+		font-weight: 600;
+	}
 `;
 
 export const InfoArticle = styled.article`
@@ -24,6 +81,9 @@ export const ImgWrap = styled.div`
 `;
 
 export const ImgListWrap = styled.div`
+	display: flex;
+	align-items: center;
+	width: 100%;
 	height: 150px;
 	border: 0.5px solid #ededed;
 	margin-top: 4px;
@@ -37,6 +97,8 @@ export const ImgListWrap = styled.div`
 
 export const ImageItem = styled.li`
 	height: 100%;
+	list-style: none;
+	cursor: pointer;
 
 	& img {
 		width: 100%;
