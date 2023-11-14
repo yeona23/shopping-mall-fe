@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SnsIcon from '../snsIcon/SnsIcon';
 
-const LoginWrapper = styled.body`
+const RegisterWrapper = styled.body`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -10,14 +10,14 @@ const LoginWrapper = styled.body`
 	flex-direction: column;
 `;
 
-const LoginDiv = styled.div`
+const RegisterDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 `;
 
-const LoginTitleDiv = styled.div`
+const RegisterTitleDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -30,7 +30,7 @@ const LoginTitleDiv = styled.div`
 	line-height: 39.69px;
 `;
 
-const LoginInput = styled.input.attrs({
+const RegisterInput = styled.input.attrs({
 	placeholderTextColor: '#6A6A6A',
 })`
 	width: 427px;
@@ -41,7 +41,7 @@ const LoginInput = styled.input.attrs({
 	font-size: 16px;
 `;
 
-const LoginForm = styled.form`
+const RegisterForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -49,7 +49,7 @@ const LoginForm = styled.form`
 	padding-bottom: 40px;
 `;
 
-const LoginButton = styled.button`
+const RegisterButton = styled.button`
 	background-color: #5d2510;
 	color: #ede1d2;
 	border: 1px solid #5d2510;
@@ -75,7 +75,7 @@ const AccountDiv = styled.div`
 	top: 60px;
 `;
 
-const SignUpDiv = styled.div`
+const SnsIconDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -87,24 +87,24 @@ const SignUpDiv = styled.div`
 
 const Register = () => {
 	return (
-		<LoginWrapper>
+		<RegisterWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
-			<LoginDiv>
-				<LoginTitleDiv>SIGN UP</LoginTitleDiv>
-				<LoginForm>
-					<LoginInput placeholder="NAME"></LoginInput>
-					<LoginInput placeholder="ID" type="email"></LoginInput>
-					<LoginInput placeholder="PASSWORD" type="password"></LoginInput>
-					<LoginInput
+			<RegisterDiv>
+				<RegisterTitleDiv>SIGN UP</RegisterTitleDiv>
+				<RegisterForm>
+					<RegisterInput placeholder="NAME"></RegisterInput>
+					<RegisterInput placeholder="ID" type="email"></RegisterInput>
+					<RegisterInput placeholder="PASSWORD" type="password"></RegisterInput>
+					<RegisterInput
 						placeholder="VERIFY PASSWORD"
-						type="password"></LoginInput>
-					<LoginButton>SIGN UP</LoginButton>
-				</LoginForm>
-				<SignUpDiv>
+						type="password"></RegisterInput>
+					<RegisterButton>SIGN UP</RegisterButton>
+				</RegisterForm>
+				<SnsIconDiv>
 					<SnsIcon></SnsIcon>
-				</SignUpDiv>
-			</LoginDiv>
-		</LoginWrapper>
+				</SnsIconDiv>
+			</RegisterDiv>
+		</RegisterWrapper>
 	);
 };
 

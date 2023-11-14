@@ -4,7 +4,7 @@ export const ButtonWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
 	width: 300px;
-	padding-top: 30px;
+	padding-top: 24px;
 `;
 
 export const Button = styled.button`
