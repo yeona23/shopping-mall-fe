@@ -4,5 +4,7 @@ export const ProductSection = styled.section`
 	width: 70%;
 	min-width: 1320px;
 	margin: auto;
+	margin-top: 120px;
+	margin-bottom: 80px;
 	border: 1px solid var(--color-main-text);
 `;
