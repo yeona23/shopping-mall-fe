@@ -98,6 +98,7 @@ video {
 	vertical-align: baseline;
 	font-family: 'Red Hat Display', sans-serif;
 	font-weight: 400;
+	color: var(--color-main-text);
 }
 /* HTML5 display-role reset for older browsers */
 article,
