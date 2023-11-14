@@ -13,9 +13,9 @@ export const CartTitleH2 = styled.h3`
 	font-weight: 500;
 `;
 export const CartContentsDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 `;
 export const CartItemsDiv = styled.div`
-  width: 65%;
-`
+	width: 65%;
+`;
