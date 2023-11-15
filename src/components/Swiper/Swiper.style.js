@@ -82,3 +82,18 @@ export const CategoryTitle = styled.h2`
 	text-align: center;
 	margin-bottom: 70px;
 `;
+
+export const ProductSwiperContainer = styled.div`
+	width: 100%;
+	margin-bottom: 200px;
+
+	.swiper-slide > div {
+		overflow: hidden;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+	}
+
+	.swiper-slide img {
+		width: 100%;
+	}
+`;
