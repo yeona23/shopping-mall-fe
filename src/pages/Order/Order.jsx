@@ -9,8 +9,11 @@ import {
 import CartSummary from '../../components/Cart/CartSummary/CartSummary';
 import CartItem from '../../components/Cart/CartItems/CartItem';
 import OrderInfo from '../../components/Cart/Order/OrderInfo';
+import { useSelector } from 'react-redux';
 
 const Order = () => {
+	const cartItem = useSelector((state) => state.cart);
+
 	return (
 		<CartDiv>
 			<CartTitleDiv>
@@ -21,10 +24,11 @@ const Order = () => {
 					<OrderInfo />
 				</CartItemsDiv>
 				<CartSummary btnText="Pay Now">
-					<CartItem />
-					<CartItem />
-					<CartItem />
-					<CartItem />
+					<div>
+						{cartItem.map((item, index) => (
+							<CartItem key={index} item={item} />
+						))}
+					</div>
 				</CartSummary>
 			</CartContentsDiv>
 		</CartDiv>

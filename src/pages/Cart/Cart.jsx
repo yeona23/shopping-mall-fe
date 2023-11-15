@@ -8,7 +8,6 @@ import {
 	CartTitleDiv,
 	CartTitleH2,
 } from './Cart.style';
-import { useEffect } from 'react';
 
 const Cart = () => {
 	const cartItem = useSelector((state) => state.cart);

@@ -4,13 +4,11 @@ import cartReducer from '../slice/cartSlice';
 
 const rootReducer = combineReducers({
 	user: userReducer,
+	cart: cartReducer,
 });
 
 const store = configureStore({
-	reducer: {
-		rootReducer,
-		cart: cartReducer,
-	},
+	reducer: rootReducer,
 });
 
 export default store;

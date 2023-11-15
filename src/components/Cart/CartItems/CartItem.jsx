@@ -9,8 +9,10 @@ import {
 } from './CartItem.style';
 import Button from './../CartUI/Button';
 import { FiCheck } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 
 const CartItem = ({ item, removeItemHandler }) => {
+	const location = useLocation();
 	const [isChecked, setIsChecked] = useState(false);
 	const checkInputHandler = (e) => {
 		setIsChecked(e.target.checked);
@@ -18,14 +20,18 @@ const CartItem = ({ item, removeItemHandler }) => {
 	return (
 		<ItemDiv>
 			<ItemCheckDiv>
-				<ItemCheckInput
-					type="checkbox"
-					id={item.id}
-					onClick={checkInputHandler}
-				/>
-				<label htmlFor={item.id}>
-					{isChecked && <FiCheck className="check" />}
-				</label>
+				{!location.pathname.includes('order') && (
+					<div>
+						<ItemCheckInput
+							type="checkbox"
+							id={item.id}
+							onClick={checkInputHandler}
+						/>
+						<label htmlFor={item.id}>
+							{isChecked && <FiCheck className="check" />}
+						</label>
+					</div>
+				)}
 				<ItemImgDiv>
 					<img src={item.img} alt="이미지" />
 				</ItemImgDiv>
