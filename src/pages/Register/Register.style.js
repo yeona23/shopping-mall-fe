@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginWrapper = styled.body`
+export const RegisterWrapper = styled.body`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -9,14 +9,15 @@ export const LoginWrapper = styled.body`
 	flex-direction: column;
 `;
 
-export const LoginDiv = styled.div`
+export const RegisterDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	margin-top: 80px;
 `;
 
-export const LoginTitleDiv = styled.div`
+export const RegisterTitleDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -29,18 +30,22 @@ export const LoginTitleDiv = styled.div`
 	line-height: 39.69px;
 `;
 
-export const LoginInput = styled.input.attrs({
+export const RegisterInput = styled.input.attrs({
 	placeholderTextColor: '#6A6A6A',
 })`
 	width: 427px;
 	height: 40px;
-	margin-bottom: 16px;
+	margin-top: 8px;
+	margin-bottom: 8px;
 	border: 1px solid #434343;
 	padding-left: 16px;
 	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: left;
 `;
 
-export const LoginForm = styled.form`
+export const RegisterForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -48,7 +53,7 @@ export const LoginForm = styled.form`
 	padding-bottom: 40px;
 `;
 
-export const LoginButton = styled.button`
+export const RegisterButton = styled.button`
 	background-color: #5d2510;
 	color: #ede1d2;
 	border: 1px solid #5d2510;
@@ -57,7 +62,7 @@ export const LoginButton = styled.button`
 	height: 42px;
 	font-size: 20px;
 	font-weight: 400;
-
+	margin-top: 16px;
 	&:hover {
 		cursor: pointer;
 	}
@@ -74,30 +79,48 @@ export const AccountDiv = styled.div`
 	top: 80px;
 `;
 
-export const SignUpDiv = styled.div`
+export const SnsIconDiv = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	padding-top: 20px;
 	width: 427px;
 	height: 50px;
 	border-top: 1px solid #434343;
 `;
 
-export const SignUpButton = styled.button`
-	width: 147px;
-	height: 37px;
-	font-size: 16px;
-	color: #5d2510;
-	border: 1px solid #5d2510;
-	background-color: white;
-	&:hover {
-		cursor: pointer;
-	}
-`;
-
 export const Paragraph = styled.p`
 	width: 90%;
 	text-align: left;
 	font-size: 12px;
+`;
+
+export const ProfileImgLabel = styled.label`
+	margin: 5px 0 20px 0;
+	font-size: 16px;
+	color: var(--color-main-text);
+	display: inline-block;
+	cursor: pointer;
+`;
+
+export const ProfileImgInput = styled.input`
+	display: none;
+`;
+
+export const ProfileImgDiv = styled.div`
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	overflow: hidden;
+	border: 2px solid var(--color-main-text);
+`;
+
+export const ProfileImg = styled.img`
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 `;

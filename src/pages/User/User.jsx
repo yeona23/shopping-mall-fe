@@ -99,7 +99,7 @@ const UserItemTitleDiv = styled.div`
 `;
 
 const UserItemContentDiv = styled.div`
-	width: 400px;
+	width: 500px;
 	height: 48px;
 	display: flex;
 	align-items: center;
@@ -152,21 +152,17 @@ const User = () => {
 							<UserItemContentDiv>
 								대한민국 서울특별시 청와대 주소 123-456
 							</UserItemContentDiv>
-							<div>아</div>
 						</UserLeftItemDiv>
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>e-mail</UserItemTitleDiv>
 							<UserItemContentDiv>asdasd@asdasd.com</UserItemContentDiv>
-							<div>아</div>
 						</UserLeftItemDiv>
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>phone number</UserItemTitleDiv>
 							<UserItemContentDiv>010-000-00000</UserItemContentDiv>
-							<div>아</div>
 						</UserLeftItemDiv>
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>change password</UserItemTitleDiv>
-							<div>아</div>
 						</UserLeftItemDiv>
 					</UserItemDiv>
 					<UserItemDiv>
