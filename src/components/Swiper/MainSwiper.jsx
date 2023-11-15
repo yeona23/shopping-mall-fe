@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainSwiperContainer } from './Swiper.styled';
+import { MainSwiperContainer } from './Swiper.style';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
