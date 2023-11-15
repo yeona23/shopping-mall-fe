@@ -39,7 +39,9 @@ export const ItemQuantityBtn = styled.button`
 	width: 30%;
 	background: #fff;
 	border: none;
-	img {
+	.plus-minus {
+		width: 20px;
+		height: 20px;
 		vertical-align: middle;
 	}
 `;

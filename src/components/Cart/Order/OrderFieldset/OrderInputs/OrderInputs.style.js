@@ -13,14 +13,17 @@ const showCardInputs = keyframes`
 
 export const OrderInputDiv = styled.div`
 	margin-bottom: 12px;
-	display: grid;
-	grid-template-columns: auto auto;
-	grid-template-rows: auto auto;
-	gap: 8px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
 	animation: ${showCardInputs} 0.7s ease;
+	.divided-input {
+		width: calc(50% - 4px);
+	}
 `;
 export const OrderInput = styled.input`
 	width: 100%;
+	margin-bottom: 8px;
 	height: 40px;
 	border: 1px solid #999;
 	border-radius: 3px;

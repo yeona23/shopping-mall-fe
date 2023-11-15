@@ -4,8 +4,7 @@ import OrderInputs from './OrderInputs/OrderInputs';
 import OrderPaymentInput from './OrderInputs/OrderPaymentInput/OrderPaymentInput';
 
 const OrderFieldset = ({ children }) => {
-	let contactInput, paymentInput;
-	if (children === 'Contact Information') contactInput = true;
+	let paymentInput;
 	if (children === 'Payment Method') paymentInput = true;
 	return (
 		<fieldset>

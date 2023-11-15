@@ -17,10 +17,22 @@ const OrderPaymentInput = () => {
 			</OrderPaymentLi>
 			{creditChecked && (
 				<OrderInputDiv>
-					<OrderInput type="text" placeholder="Card Number" />
-					<OrderInput type="text" placeholder="Cardholder Full Name" />
-					<OrderInput type="text" placeholder="Expiry Date(MM/YY)" />
-					<OrderInput type="text" placeholder="CVV" />
+					<OrderInput
+						className="divided-input"
+						type="text"
+						placeholder="Card Number"
+					/>
+					<OrderInput
+						className="divided-input"
+						type="text"
+						placeholder="Cardholder Full Name"
+					/>
+					<OrderInput
+						className="divided-input"
+						type="text"
+						placeholder="Expiry Date(MM/YY)"
+					/>
+					<OrderInput className="divided-input" type="text" placeholder="CVV" />
 				</OrderInputDiv>
 			)}
 			<OrderPaymentLi onClick={clickHandler} className="ani">
