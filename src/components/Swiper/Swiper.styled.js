@@ -82,3 +82,38 @@ export const CategoryTitle = styled.h2`
 	text-align: center;
 	margin-bottom: 70px;
 `;
+
+export const ItemContainer = styled.div`
+	width: 100%;
+	margin-bottom: 250px;
+
+	.swiper-wrapper {
+		width: 100%;
+	}
+
+	.swiper-slide {
+		margin-bottom: 70px;
+		cursor: pointer;
+
+		& span {
+			border-top: 1px solid var(--color-main-text);
+			margin-top: 10px;
+			width: 100%;
+			display: block;
+			padding-top: 5px;
+		}
+		& p {
+			margin: 10px 0;
+		}
+	}
+`;
+
+export const ItemImg = styled.div`
+	width: 100%;
+	aspect-ratio: 1/1;
+	overflow: hidden;
+
+	& img {
+		width: 100%;
+	}
+`;
