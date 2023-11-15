@@ -50,7 +50,7 @@ const ProductDetailMain = () => {
 					navigation={true}
 					modules={[Navigation, Mousewheel]}
 					mousewheel={{ forceToAxis: true }}
-					className="swiper">
+					className="main-img-swiper">
 					{images &&
 						images.map((image, index) => (
 							<SwiperSlide key={index}>
@@ -73,10 +73,10 @@ const ProductDetailMain = () => {
 							navigation={true}
 							modules={[Navigation, Mousewheel]}
 							mousewheel={{ forceToAxis: true }}
-							className="swiper">
+							className="sub-img-swiper">
 							{images &&
 								images.map((image, index) => (
-									<SwiperSlide key={index}>
+									<SwiperSlide key={index} className="sub-img-slide">
 										<ImageItem>
 											<img src={image.src} alt={image.alt} />
 										</ImageItem>
