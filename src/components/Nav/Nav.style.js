@@ -8,6 +8,7 @@ export const Header = styled.div`
 	top: 0;
 	left: 0;
 	z-index: 10000;
+	top: 0;
 `;
 
 export const HeaderNav = styled.div`

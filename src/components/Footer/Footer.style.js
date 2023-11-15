@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 
 export const FtBox = styled.div`
+	bottom: 0;
 	width: 100%;
 	background: var(--color-palmoil);
 	font-weight: 300;

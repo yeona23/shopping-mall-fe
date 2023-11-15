@@ -74,7 +74,7 @@ const AccountDiv = styled.div`
 	font-size: 30px;
 	padding-bottom: 50px;
 	position: absolute;
-	top: 60px;
+	top: 80px;
 `;
 
 const SignUpDiv = styled.div`
