@@ -8,28 +8,38 @@ import {
 	ItemQuantityInput,
 } from './CartItemDesc.style';
 import { FiMinus, FiPlus } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
+import {
+	MINUS_ITEM_QUANTITY,
+	PLUS_ITEM_QUANTITY,
+} from '../../../../slice/cartSlice';
 
-const CartItemDesc = () => {
-	const [inputValue, setInputValue] = useState(1);
+const CartItemDesc = ({ item }) => {
+	const dispatch = useDispatch();
 	const minusHandler = () => {
-		if (inputValue === 1) return;
-		setInputValue(inputValue - 1);
+		if (item.quantity === 1) return;
+		dispatch(MINUS_ITEM_QUANTITY(item));
 	};
 	const plusHandler = () => {
-		setInputValue(inputValue + 1);
+		dispatch(PLUS_ITEM_QUANTITY(item));
 	};
 	return (
 		<ItemDescDiv>
 			<div>
-				<ItemNameP>Item name</ItemNameP>
-				<ItemOptionsP>option1</ItemOptionsP>
-				<ItemOptionsP>option2</ItemOptionsP>
+				<ItemNameP>{item.name}</ItemNameP>
+				<ItemOptionsP>Color: {item.color}</ItemOptionsP>
+				<ItemOptionsP>Size: {item.size}</ItemOptionsP>
 			</div>
 			<ItemQuantityDiv>
 				<ItemQuantityBtn onClick={minusHandler}>
 					<FiMinus className="plus-minus" />
 				</ItemQuantityBtn>
-				<ItemQuantityInput type="number" value={inputValue} min={1} max={100} />
+				<ItemQuantityInput
+					type="number"
+					value={item.quantity}
+					min={1}
+					max={100}
+				/>
 				<ItemQuantityBtn onClick={plusHandler}>
 					<FiPlus className="plus-minus" />
 				</ItemQuantityBtn>

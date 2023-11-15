@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import CartItem from './../../components/Cart/CartItems/CartItem';
 import CartSummary from './../../components/Cart/CartSummary/CartSummary';
 import {
@@ -7,8 +8,11 @@ import {
 	CartTitleDiv,
 	CartTitleH2,
 } from './Cart.style';
+import { useEffect } from 'react';
 
 const Cart = () => {
+	const cartItem = useSelector((state) => state.cart);
+
 	return (
 		<CartDiv>
 			<CartTitleDiv>
@@ -16,9 +20,9 @@ const Cart = () => {
 			</CartTitleDiv>
 			<CartContentsDiv>
 				<CartItemsDiv>
-					<CartItem />
-					<CartItem />
-					<CartItem />
+					{cartItem.map((item, index) => (
+						<CartItem key={index} item={item} />
+					))}
 				</CartItemsDiv>
 				<CartSummary btnText="Checkout" />
 			</CartContentsDiv>
