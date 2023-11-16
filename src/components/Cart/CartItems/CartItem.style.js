@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ItemDiv = styled.div`
+export const ItemLi = styled.li`
 	padding: 22px 0;
 	display: grid;
 	grid-template-columns: 1fr 3fr 1fr;
@@ -9,31 +9,8 @@ export const ItemDiv = styled.div`
 export const ItemCheckDiv = styled.div`
 	display: flex;
 	align-items: center;
-	.check {
-		color: #fff;
-		width: 14px;
-		height: 14px;
-	}
 `;
-export const ItemCheckInput = styled.input`
-	display: none;
-	& + label {
-		display: inline-block;
-		content: '';
-		width: 18px;
-		height: 18px;
-		margin-right: 8px;
-		border-radius: 50%;
-		border: 1px solid #434343;
-		cursor: pointer;
-	}
-	&:checked + label {
-		background-color: #434343;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-`;
+
 export const ItemImgDiv = styled.div`
 	margin-right: 15px;
 	width: 120px;

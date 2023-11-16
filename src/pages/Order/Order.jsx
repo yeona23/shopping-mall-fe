@@ -24,11 +24,11 @@ const Order = () => {
 					<OrderInfo />
 				</CartItemsDiv>
 				<CartSummary btnText="Pay Now">
-					<div>
+					<ul>
 						{cartItem.map((item, index) => (
 							<CartItem key={index} item={item} />
 						))}
-					</div>
+					</ul>
 				</CartSummary>
 			</CartContentsDiv>
 		</CartDiv>
