@@ -1,17 +1,24 @@
-import React from 'react';
-import { BsArrowDownUp, BsPlus } from 'react-icons/bs';
+import React, { useState } from 'react';
+import { BsDash, BsPlus } from 'react-icons/bs';
 import { PaginationBox } from './Pagination.style';
+import FDropdown from './FDropdown';
 
 const PaginationBar = () => {
+	const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+	const toggleDropdown = () => {
+		setDropdownVisible(!isDropdownVisible);
+	};
 	return (
 		<PaginationBox>
-			<div>
+			<div onClick={toggleDropdown}>
 				<span>FILTER</span>
-				<BsPlus size={22} color="var(--color-main-text)" />
-			</div>
-			<div>
-				<span>SORT</span>
-				<BsArrowDownUp size={12} color="var(--color-main-text)" />
+				{isDropdownVisible ? (
+					<BsDash size={22} color="var(--color-main-text)" />
+				) : (
+					<BsPlus size={22} color="var(--color-main-text)" />
+				)}
+				<FDropdown isOpen={isDropdownVisible} />
 			</div>
 		</PaginationBox>
 	);
