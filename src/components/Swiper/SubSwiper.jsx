@@ -3,6 +3,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { CategoryTitle, SlideImg, SubSwiperContainer } from './Swiper.style';
+import { MoreBtn } from '../Main/Main.style';
 const SubSwiper = ({ dataTitle }) => {
 	let backgroundColor = '';
 	if (dataTitle === 'OUTER' || dataTitle === 'BOTTOM') {
@@ -75,6 +76,7 @@ const SubSwiper = ({ dataTitle }) => {
 					</SwiperSlide>
 				</div>
 			</Swiper>
+			<MoreBtn>MORE</MoreBtn>
 		</SubSwiperContainer>
 	);
 };
