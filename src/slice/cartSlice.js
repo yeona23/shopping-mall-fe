@@ -39,6 +39,11 @@ const cartSlice = createSlice({
 			state = state.filter((item) => item.id !== removeId);
 			return state;
 		},
+		REMOVE_CHECKED_ITEM(state, action) {
+			const checkedIds = action.payload;
+			state = state.filter((item) => !checkedIds.includes(item.id));
+			return state;
+		},
 		MINUS_ITEM_QUANTITY(state, action) {
 			const changeId = action.payload.id;
 			const changeItem = state.find((item) => item.id === changeId);
@@ -52,7 +57,11 @@ const cartSlice = createSlice({
 	},
 });
 
-export const { REMOVE_CART_ITEM, MINUS_ITEM_QUANTITY, PLUS_ITEM_QUANTITY } =
-	cartSlice.actions;
+export const {
+	REMOVE_CART_ITEM,
+	MINUS_ITEM_QUANTITY,
+	PLUS_ITEM_QUANTITY,
+	REMOVE_CHECKED_ITEM,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -39,7 +39,7 @@ const CartItem = ({
 			</ItemCheckDiv>
 			<CartItemDesc item={item} />
 			<ItemHandleDiv>
-				<p>{item.price * item.quantity}</p>
+				<p>₩{item.price * item.quantity}</p>
 				<Button
 					size="120px"
 					itemId={item.id}

@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import CartItem from './../../components/Cart/CartItems/CartItem';
 import CartSummary from './../../components/Cart/CartSummary/CartSummary';
 import {
+	CartCheckedDeleteDiv,
 	CartContentsDiv,
 	CartDiv,
 	CartItemsDiv,
@@ -10,6 +11,7 @@ import {
 } from './Cart.style';
 import CartHeader from '../../components/Cart/CartHeader/CartHeader';
 import { useState } from 'react';
+import Button from '../../components/Cart/CartUI/Button';
 
 const Cart = () => {
 	const cartItem = useSelector((state) => state.cart);
@@ -51,6 +53,11 @@ const Cart = () => {
 							/>
 						))}
 					</ul>
+					<CartCheckedDeleteDiv>
+						<Button size="120px" checkedItemsId={checkedItemsId}>
+							선택 삭제
+						</Button>
+					</CartCheckedDeleteDiv>
 				</CartItemsDiv>
 				<CartSummary btnText="Checkout" />
 			</CartContentsDiv>
