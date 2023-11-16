@@ -5,7 +5,6 @@ export const MainSwiperContainer = styled.div`
 		width: 100%;
 		overflow: hidden;
 		height: 83vh;
-		margin-bottom: 250px;
 	}
 
 	.swiper-wrapper {
@@ -38,6 +37,7 @@ export const SubSwiperContainer = styled.div`
 
 	.swiper {
 		width: 1320px;
+		margin-bottom: 60px;
 	}
 
 	.swiper-wrapper {
