@@ -5,8 +5,13 @@ export const Header = styled.div`
 	background: #ede1d250;
 	backdrop-filter: blur(5px);
 	position: fixed;
+<<<<<<< HEAD
 	top: 0;
 	left: 0;
+=======
+	left: 0;
+	top: 0;
+>>>>>>> 038feaa (feat: ProductDetailMain 부분 미흡한 부분 추가 스타일링)
 	z-index: 10000;
 	top: 0;
 `;
