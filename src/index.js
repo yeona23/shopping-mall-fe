@@ -11,7 +11,7 @@ import Users from './pages/Users/Users';
 import Products from './pages/Products/Products';
 import Product from './pages/Product/Product';
 import Seller from './pages/Seller/Seller';
-import User from './pages/User/User';
+import User from './pages/User/User/User';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
