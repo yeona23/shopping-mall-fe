@@ -12,30 +12,30 @@ import {
 import { signoutUser } from '../../../api/AuthApi';
 import localToken from '../../../api/LocalToken';
 
-const [enteredMobile, setEnteredMobile] = useState('');
-const [enteredEmail, setEnteredEmail] = useState('');
-const [enteredPassword, setEnteredPassword] = useState('');
-
-const mobileInputChangeHandler = (event) => {
-	setEnteredMobile(event.target.value);
-};
-
-const emailInputChangeHandler = (event) => {
-	setEnteredEmail(event.target.value);
-};
-
-const passwordInputChangeHandler = (event) => {
-	setEnteredPassword(event.target.value);
-};
-
-const [inputValue, setInputValue] = useState({
-	mobile: '',
-	email: '',
-	password: '',
-});
-
 const DeleteModal = (props) => {
 	const { onClose } = props;
+
+	const [enteredMobile, setEnteredMobile] = useState('');
+	const [enteredEmail, setEnteredEmail] = useState('');
+	const [enteredPassword, setEnteredPassword] = useState('');
+
+	const mobileInputChangeHandler = (event) => {
+		setEnteredMobile(event.target.value);
+	};
+
+	const emailInputChangeHandler = (event) => {
+		setEnteredEmail(event.target.value);
+	};
+
+	const passwordInputChangeHandler = (event) => {
+		setEnteredPassword(event.target.value);
+	};
+
+	const [inputValue, setInputValue] = useState({
+		mobile: '',
+		email: '',
+		password: '',
+	});
 
 	const signoutHandler = async (e) => {
 		e.preventDefault();
