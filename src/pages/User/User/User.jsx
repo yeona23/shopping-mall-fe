@@ -26,10 +26,12 @@ import {
 	UserRightItemDiv,
 	UserWrapper,
 } from './User.style';
+import { useNavigate } from 'react-router';
 
 const User = () => {
 	const [imgFile, setImgFile] = useState('');
 	const imgRef = useRef();
+	const navigate = useNavigate();
 
 	const saveImgFile = () => {
 		const file = imgRef.current.files[0];
@@ -61,7 +63,18 @@ const User = () => {
 		addressSetIsOpen(true);
 	};
 
+	const logoutHandler = async () => {
+		try {
+			await logoutUser();
+			localToken.remove();
+			navigate('/');
+		} catch (error) {
+			console.error('Logout failed:', error.message);
+		}
+	};
+
 	const defaultUserImage = '/assets/icons/icon-user.png';
+
 	return (
 		<UserWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
@@ -162,7 +175,7 @@ const User = () => {
 				</UserContent>
 				<UserContent>
 					<div>
-						<SignOutDiv>sign out</SignOutDiv>
+						<SignOutDiv onClick={logoutHandler}>sign out</SignOutDiv>
 						<DeleteYourAccountDiv onClick={deleteOnClickButton}>
 							Delete Your account
 						</DeleteYourAccountDiv>

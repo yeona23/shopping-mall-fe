@@ -30,7 +30,7 @@ export const logoutUser = async () => {
 	return await authApi.post(LOG_OUT);
 };
 
-export const signOutUser = async (body) => {
+export const signoutUser = async (body) => {
 	return await authApi.post(SIGN_OUT, {
 		mobile: body.mobile,
 		email: body.email,

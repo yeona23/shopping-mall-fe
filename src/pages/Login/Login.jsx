@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -7,81 +7,140 @@ import {
 	LoginDiv,
 	LoginForm,
 	LoginInput,
+	LoginInputEmail,
+	LoginInputPassword,
 	LoginTitleDiv,
 	LoginWrapper,
 	Paragraph,
 	SignUpButton,
 	SignUpDiv,
 } from './Login.style';
+import { loginUser } from '../../api/AuthApi';
+import localToken from '../../api/LocalToken';
 
 const Login = () => {
+	const inputRef = useRef();
 	const navigate = useNavigate();
-	const onRegisterClick = () => {
-		navigate('/register');
-	};
-	const [emailIsValid, setEmailIsValid] = useState(false);
-	const [passwordIsValid, setPasswordIsValid] = useState(false);
-	const [textIsTouched, setTextIsTouched] = useState(false);
+
 	const [inputValue, setInputValue] = useState({
 		email: '',
 		password: '',
 	});
 
-	const inputValueHandler = (e) => {
-		const { name, value } = e.target;
-		setInputValue({ ...inputValue, [name]: value });
+	const [enteredEmail, setEnteredEmail] = useState('');
+	const [enteredEmailIsValid, setEnteredEmailIsValid] = useState(false);
+	const [enteredEmailIsTouched, setEnteredEmailIsTouched] = useState(false);
+	const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailIsTouched;
 
-		setTextIsTouched(true);
+	const [enteredPassword, setEnteredPassword] = useState('');
+	const [enteredPasswordIsValid, setEnteredPasswordIsValid] = useState(false);
+	const [enteredPasswordIsTouched, SetEnteredPasswordIsTouched] =
+		useState(false);
+	const passwordInputIsInvalid =
+		!enteredPasswordIsValid && enteredPasswordIsTouched;
 
-		if (name === 'email') {
-			if (e.target.value.trim() === '') {
-				setEmailIsValid(false);
-			}
-			if (e.target.value.length > 0 && /^.+@.+\..+$/.test(e.target.value)) {
-				setEmailIsValid(true);
-			} else {
-				setEmailIsValid(false);
-			}
-		}
-
-		if (name === 'password') {
-			if (e.target.value.trim() === '') {
-				setPasswordIsValid(false);
-			}
-
-			if (e.target.value.length > 0 && e.target.value.length < 6) {
-				setPasswordIsValid(false);
-			} else setPasswordIsValid(true);
-		}
+	const emailInputChangeHandler = (event) => {
+		setEnteredEmail(event.target.value);
 	};
 
-	const nameEmailInputIsInValid = !emailIsValid && textIsTouched;
-	const namePasswordInputIsInValid = !passwordIsValid && textIsTouched;
+	const passwordInputChangeHandler = (event) => {
+		setEnteredPassword(event.target.value);
+	};
+
+	const emailInputBlurHandler = () => {
+		setEnteredEmailIsTouched(true);
+	};
+
+	const passwordInputBlurHandler = () => {
+		SetEnteredPasswordIsTouched(true);
+	};
+
+	const onRegisterClick = () => {
+		navigate('/register');
+	};
+
+	useEffect(() => {
+		inputRef.current.focus();
+	}, []);
+
+	const loginUserHandler = async (e) => {
+		e.preventDefault();
+
+		setEnteredEmailIsTouched(true);
+		SetEnteredPasswordIsTouched(true);
+
+		// email 유효성검사
+		if (enteredEmail.trim() === '') {
+			setEnteredEmailIsValid(false);
+		}
+		if (enteredEmail.length > 0 && /^.+@.+\..+$/.test(enteredEmail.value)) {
+			setEnteredEmailIsValid(true);
+		} else {
+			setEnteredEmailIsValid(false);
+		}
+
+		// password 유효성 검사
+		if (enteredPassword.trim() === '') {
+			setEnteredPasswordIsValid(false);
+		}
+
+		if (enteredPassword.length > 0 && enteredPassword.length < 6) {
+			setEnteredPasswordIsValid(false);
+		} else setEnteredPasswordIsValid(true);
+
+		if (enteredEmailIsValid && enteredPasswordIsValid) {
+			try {
+				const response = await loginUser(inputValue);
+
+				if (!response) return;
+
+				const { access_token } = response;
+
+				const saveToken = (token) => {
+					localToken.save(token);
+				};
+
+				if (access_token) {
+					saveToken(access_token);
+					navigate('/');
+				}
+			} catch (error) {
+				if (error.response.status === '403') {
+					console.error(error.message);
+				}
+				console.error(error.message);
+			}
+		}
+	};
 
 	return (
 		<LoginWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
 			<LoginDiv>
 				<LoginTitleDiv>SIGN IN</LoginTitleDiv>
-				<LoginForm>
-					<LoginInput
+				<LoginForm onSubmit={loginUserHandler}>
+					<LoginInputEmail
+						invalid={emailInputIsInvalid}
 						placeholder="ID"
-						type="email"
+						type="text"
 						name="email"
-						onChange={inputValueHandler}></LoginInput>
-					{nameEmailInputIsInValid && (
+						onBlur={emailInputBlurHandler}
+						onChange={emailInputChangeHandler}
+						ref={inputRef}></LoginInputEmail>
+					{emailInputIsInvalid && (
 						<Paragraph>정확하지 않은 이메일입니다.</Paragraph>
 					)}
-					<LoginInput
+					<LoginInputPassword
+						invalid={passwordInputIsInvalid}
 						placeholder="PASSWORD"
 						type="password"
 						name="password"
-						onChange={inputValueHandler}
-						isValid={namePasswordInputIsInValid}></LoginInput>
-					{namePasswordInputIsInValid && (
+						onBlur={passwordInputBlurHandler}
+						onChange={passwordInputChangeHandler}></LoginInputPassword>
+					{passwordInputIsInvalid && (
 						<Paragraph>비밀번호는 최소 6자리 이상이어야 합니다.</Paragraph>
 					)}
-					<LoginButton>SIGN IN</LoginButton>
+					<LoginButton type="submit">SIGN IN</LoginButton>
 				</LoginForm>
 				<SignUpDiv>
 					<div>Dont you have on account?</div>

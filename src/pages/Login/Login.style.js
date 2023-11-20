@@ -29,15 +29,38 @@ export const LoginTitleDiv = styled.div`
 	line-height: 39.69px;
 `;
 
-export const LoginInput = styled.input.attrs({
+export const LoginInputEmail = styled.input.attrs({
 	placeholderTextColor: '#6A6A6A',
 })`
 	width: 427px;
 	height: 40px;
 	margin-bottom: 16px;
-	border: 1px solid #434343;
+	/* border: 1px solid #434343; */
+	border: ${(props) =>
+		props.invalid ? '1.5px solid red' : '1px solid #434343'};
 	padding-left: 16px;
 	font-size: 16px;
+	background-color: ${(props) => props.invalid && 'rgba(253,221,221,0.3)'};
+	&:focus {
+		background-color: transparent;
+	}
+`;
+
+export const LoginInputPassword = styled.input.attrs({
+	placeholderTextColor: '#6A6A6A',
+})`
+	width: 427px;
+	height: 40px;
+	margin-bottom: 16px;
+	/* border: 1px solid #434343; */
+	border: ${(props) =>
+		props.invalid ? '1.5px solid red' : '1px solid #434343'};
+	padding-left: 16px;
+	font-size: 16px;
+	background-color: ${(props) => props.invalid && 'rgba(253,221,221,0.3)'};
+	&:focus {
+		background-color: transparent;
+	}
 `;
 
 export const LoginForm = styled.form`
@@ -97,6 +120,8 @@ export const SignUpButton = styled.button`
 `;
 
 export const Paragraph = styled.p`
+	margin-top: 0px;
+	margin-bottom: 0px;
 	width: 90%;
 	text-align: left;
 	font-size: 12px;

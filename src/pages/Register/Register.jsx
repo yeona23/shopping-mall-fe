@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SnsIcon from '../snsIcon/SnsIcon';
 import {
 	AccountDiv,
@@ -16,21 +16,26 @@ import {
 	RegisterWrapper,
 	SnsIconDiv,
 } from './Register.style';
+import { useNavigate } from 'react-router';
+import { registerUser } from '../../api/AuthApi';
 
 const Register = () => {
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [passwordIsValid, setPasswordIsValid] = useState(false);
-	const [textIsTouched, setTextIsTouched] = useState(false);
 	const [confirmedPassword, setConfirmedPassword] = useState('');
-	const [passwordsMatch, setPasswordsMatch] = useState(true);
-	const [imgFile, setImgFile] = useState('');
-	const imgRef = useRef();
-
+	const [isSignUpClicked, setIsSignUpClicked] = useState(false);
+	const [textIsTouched, setTextIsTouched] = useState(false || isSignUpClicked);
+	const navigate = useNavigate();
+	const inputRef = useRef();
 	const [inputValue, setInputValue] = useState({
 		name: null,
 		email: '',
 		password: '',
 	});
+
+	useEffect(() => {
+		inputRef.current.focus();
+	}, []);
 
 	const isPasswordValid = (password) => {
 		if (password.length < 6) {
@@ -80,39 +85,46 @@ const Register = () => {
 		}
 	};
 
-	const saveImgFile = () => {
-		const file = imgRef.current.files[0];
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onloadend = () => {
-			setImgFile(reader.result);
-		};
+	const registerUserHandler = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await registerUser(inputValue);
+		} catch (error) {
+			if (error.response.status === '406') {
+				alert(error.message);
+			}
+			console.error(error.message);
+		} finally {
+			setIsSignUpClicked(true);
+		}
 	};
 
-	const defaultUserImage = '/assets/icons/icon-user.png';
-
-	const nameEmailInputIsInValid = !emailIsValid && textIsTouched;
-	const namePasswordInputIsInValid = !passwordIsValid && textIsTouched;
+	const nameEmailInputIsInValid =
+		!emailIsValid && textIsTouched && isSignUpClicked;
+	const namePasswordInputIsInValid =
+		!passwordIsValid && textIsTouched && isSignUpClicked;
 	const nameConfirmedPasswordIsInvalid =
-		textIsTouched && confirmedPassword !== inputValue.password;
+		textIsTouched &&
+		inputValue.pwdck !== inputValue.password &&
+		isSignUpClicked;
 
 	return (
 		<RegisterWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
 			<RegisterDiv>
 				<RegisterTitleDiv>SIGN UP</RegisterTitleDiv>
-				<RegisterForm>
+				<RegisterForm onSubmit={registerUserHandler}>
 					<RegisterInput
 						type="text"
 						placeholder="NAME"
 						name="name"
-						onChange={inputValueHandler}></RegisterInput>
+						onChange={inputValueHandler}
+						ref={inputRef}></RegisterInput>
 					<RegisterInput
 						type="tel"
 						placeholder="PHONE NUMBER"
 						name="phoneNumber"
 						onChange={inputValueHandler}></RegisterInput>
-
 					<RegisterInput
 						placeholder="ID"
 						type="email"
@@ -143,7 +155,7 @@ const Register = () => {
 					{nameConfirmedPasswordIsInvalid && (
 						<Paragraph>비밀번호가 일치하지 않습니다.</Paragraph>
 					)}
-					<RegisterButton>SIGN UP</RegisterButton>
+					<RegisterButton type="submit">SIGN UP</RegisterButton>
 				</RegisterForm>
 				<SnsIconDiv>
 					<SnsIcon></SnsIcon>
