@@ -1,4 +1,4 @@
-import Outer from '../../components/Category/Outer/Outer';
+import Outer from '../../components/Category/Outer';
 import PaginationBar from '../../components/Pagination/PaginationBar';
 import { ProductContainer, Title } from './Products.style';
 

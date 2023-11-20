@@ -7,16 +7,17 @@ import {
 	SubThemeTitle,
 } from './Main.style';
 
-const generateImgUrl = (index) => {
-	const maxIndex = 10;
+const generateImgUrl = (dataTitle, index) => {
+	const maxIndex = 4;
 	const actualIndex = index <= maxIndex ? index : (index % maxIndex) + 1;
-	return `/assets/main${actualIndex}.jpg`;
+	return dataTitle === 'OUTER'
+		? `/assets/jacket_${actualIndex}/jacket_${actualIndex}_thumb.jpg`
+		: `/assets/knit_${actualIndex}/knit_${actualIndex}_thumb.jpg`;
 };
-
-const ProductItem = ({ index, price, itemTitle }) => (
+const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
 	<ItemBox>
 		<div>
-			<img src={generateImgUrl(index)} alt=" " />
+			<img src={generateImgUrl(dataTitle, index)} alt=" " />
 		</div>
 		<p>{itemTitle}</p>
 		<span>{price}</span>
@@ -42,7 +43,7 @@ const SubThemeBox = ({ dataTitle }) => {
 				<SubThemeTitle>{dataTitle}</SubThemeTitle>
 				<SubThemeList>
 					{items.map((item) => (
-						<ProductItem key={item.id} {...item} />
+						<ProductItem key={item.id} dataTitle={dataTitle} {...item} />
 					))}
 				</SubThemeList>
 				<MoreBtn>MORE</MoreBtn>
