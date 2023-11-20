@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductsBox from '../../Pagination/ProductsBox/ProductsBox';
+import ProductsBox from '../Pagination/ProductsBox/ProductsBox';
 
 const Outer = () => {
 	return (
