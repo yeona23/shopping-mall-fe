@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-	ProductContainer,
-	Title,
-} from '../../../pages/Products/Products.style';
-import PaginationBar from '../../Pagination/PaginationBar';
-import ProductsBox from '../../Pagination/ProductsBox/ProductsBox';
+import { ProductContainer, Title } from '../../pages/Products/Products.style';
+import PaginationBar from '../Pagination/PaginationBar';
+import ProductsBox from '../Pagination/ProductsBox/ProductsBox';
 
 const Outer = ({ type, subType }) => {
 	let titleContent;

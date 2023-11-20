@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Outer from '../../components/Category/Outer/Outer';
+import Outer from '../../components/Category/Outer';
 import New from '../../components/Category/New/New';
 import Top from '../../components/Category/Top/Top';
 import Bottom from '../../components/Category/Bottom/Bottom';
