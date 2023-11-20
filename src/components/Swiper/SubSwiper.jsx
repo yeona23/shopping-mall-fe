@@ -4,20 +4,16 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { CategoryTitle, SubItemBox, SubSwiperContainer } from './Swiper.style';
 import { MoreBtn } from '../Main/Main.style';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getProducts } from '../../api/productApi';
+import { SET_PRODUCTS } from '../../slice/productSlice';
 
-const generateImgUrl = (dataTitle, index) => {
-	const maxIndex = 4;
-	const actualIndex = index <= maxIndex ? index : (index % maxIndex) + 1;
-	return dataTitle === 'OUTER'
-		? `/assets/jacket_${actualIndex}/jacket_${actualIndex}_thumb.jpg`
-		: `/assets/knit_${actualIndex}/knit_${actualIndex}_thumb.jpg`;
-};
-const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
+const ProductItem = ({ price, itemTitle, thumbnail }) => (
 	<SubItemBox>
 		<div>
-			<img src={generateImgUrl(dataTitle, index)} alt=" " />
+			<img src={thumbnail} alt={itemTitle} />
 		</div>
 		<p>{itemTitle}</p>
 		<span>{price}</span>
@@ -26,17 +22,18 @@ const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
 
 const SubSwiper = ({ dataTitle }) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [clickTypeBtn, setClickTypeBtn] = useState();
 
-	const items = Array.from({ length: 10 }, (_, index) => ({
-		id: index + 1,
-		index: index + 1,
-		itemTitle: 'gvbhdfgwysfuygsf',
-		price: '65,000won',
-	}));
+	const products = useSelector((state) => state.product.slice(0, 10));
 
 	const clickTypeNewHandler = () => {
 		const url = '/products/?type=new';
+		navigate(url);
+	};
+
+	const clickProductItem = (product_id) => {
+		const url = `/product/${product_id}`;
 		navigate(url);
 	};
 
@@ -63,9 +60,16 @@ const SubSwiper = ({ dataTitle }) => {
 				}}
 				className="swiper">
 				<div className="swiper-wrapper">
-					{items.map((item) => (
-						<SwiperSlide key={item.id} className="swiper-slide">
-							<ProductItem dataTitle={dataTitle} {...item} />
+					{products.map((product) => (
+						<SwiperSlide
+							key={product.productId}
+							className="swiper-slide"
+							onClick={() => clickProductItem(product.productId)}>
+							<ProductItem
+								itemTitle={product.name}
+								thumbnail={product.productImg[1]}
+								price={product.price}
+							/>
 						</SwiperSlide>
 					))}
 				</div>

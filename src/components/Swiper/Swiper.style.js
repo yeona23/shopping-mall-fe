@@ -62,6 +62,12 @@ export const SubSwiperContainer = styled.div`
 		cursor: pointer;
 	}
 
+	.swiper-slide > div > div {
+		width: 100%;
+		aspect-ratio: 1/1;
+		overflow: hidden;
+	}
+
 	.swiper-slide img {
 		width: 100%;
 		object-fit: cover;
