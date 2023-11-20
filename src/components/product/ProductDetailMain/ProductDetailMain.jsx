@@ -11,18 +11,20 @@ import {
 	MainWrap,
 } from './ProductDetailMain.style';
 import ProductInfo from '../ProductInfo/ProductInfo';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const ProductDetailMain = () => {
-	const [images, setImages] = useState('');
 	const topSwiperRef = useRef(null);
 	const bottomSwiperRef = useRef(null);
 
-	useEffect(() => {
-		fetch('/data/detail-images.json')
-			.then((response) => response.json())
-			.then((data) => setImages(data))
-			.catch((error) => console.error(error));
-	}, []);
+	const { productId } = useParams();
+
+	const productsData = useSelector((state) => state.product);
+
+	const productIdData = productsData.find(
+		(product) => String(product.id) === String(productId),
+	);
 
 	const handleBottomSwiperSlideClick = (index) => {
 		if (topSwiperRef.current && bottomSwiperRef.current) {
@@ -44,11 +46,11 @@ const ProductDetailMain = () => {
 					modules={[Navigation, Mousewheel]}
 					mousewheel={{ forceToAxis: true }}
 					className="main-img-swiper">
-					{images &&
-						images.map((image, index) => (
+					{productIdData &&
+						productIdData.detail_image.map((image, index) => (
 							<SwiperSlide key={index}>
 								<ImgWrap>
-									<img src={image.src} alt={image.alt} />
+									<img src={image} />
 								</ImgWrap>
 							</SwiperSlide>
 						))}
@@ -68,14 +70,14 @@ const ProductDetailMain = () => {
 							modules={[Navigation, Mousewheel]}
 							mousewheel={{ forceToAxis: true }}
 							className="sub-img-swiper">
-							{images &&
-								images.map((image, index) => (
+							{productIdData &&
+								productIdData.detail_image.map((image, index) => (
 									<SwiperSlide
 										key={index}
 										className="sub-img-slide"
 										onClick={() => handleBottomSwiperSlideClick(index)}>
 										<ImageItem>
-											<img src={image.src} alt={image.alt} />
+											<img src={image} />
 										</ImageItem>
 									</SwiperSlide>
 								))}

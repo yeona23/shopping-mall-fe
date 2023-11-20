@@ -18,14 +18,19 @@ export const CountAndPriceWrap = styled.div`
 	display: flex;
 	align-items: center;
 
+	& div {
+	}
+
 	& div:nth-child(1) {
-		margin-right: 40px;
+		width: 100px;
+		margin-right: 30px;
 		& span {
 			margin: 0 10px;
 		}
 	}
 
 	& div:nth-child(2) {
+		width: 120px;
 		margin-right: 10px;
 
 		& span {

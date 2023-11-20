@@ -1,29 +1,26 @@
 import { useEffect, useState } from 'react';
 import { DescriptionSection, ImgWrap } from './ProductDetailDescription.style';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ProductDetailDescription = () => {
-	const [images, setImages] = useState('');
+	const { productId } = useParams();
 
-	useEffect(() => {
-		fetch('/data/detail-images.json')
-			.then((response) => response.json())
-			.then((data) => setImages(data))
-			.catch((error) => console.error(error));
-	}, []);
+	const productsData = useSelector((state) => state.product);
+
+	const productIdData = productsData.find(
+		(product) => String(product.id) === String(productId),
+	);
 
 	return (
 		<DescriptionSection>
-			<p>
-				어디에나 쉽게 어울릴 깔끔 베이직한 디자인으로 데일리룩, 출근룩에 가볍게
-				즐겨주세요
-			</p>
+			<p>{productIdData?.description}</p>
 			<ul>
-				{images &&
-					images.map((image, index) => (
-						<ImgWrap key={index}>
-							<img src={image.src} alt={image.alt} />
-						</ImgWrap>
-					))}
+				{productIdData && (
+					<ImgWrap>
+						<img src={productIdData?.description_image} />
+					</ImgWrap>
+				)}
 			</ul>
 		</DescriptionSection>
 	);
