@@ -46,11 +46,13 @@ export const SubSwiperContainer = styled.div`
 
 	.swiper-slide {
 		width: 100%;
+		cursor: pointer;
 	}
 
 	.swiper-slide img {
 		width: 100%;
 		object-fit: cover;
+		transition: all 0.3s;
 	}
 
 	.swiper-button-prev,
@@ -75,6 +77,9 @@ export const SlideImg = styled.div`
 	overflow: hidden;
 	width: 100%;
 	aspect-ratio: 1/1;
+	&:hover img {
+		scale: 1.1;
+	}
 `;
 
 export const CategoryTitle = styled.h2`
