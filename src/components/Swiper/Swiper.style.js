@@ -102,3 +102,7 @@ export const ProductSwiperContainer = styled.div`
 		width: 100%;
 	}
 `;
+
+export const subItemBox = styled.div`
+	width: 100%;
+`;
