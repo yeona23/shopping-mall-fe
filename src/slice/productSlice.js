@@ -10,9 +10,12 @@ const productSlice = createSlice({
 			state = action.payload;
 			return state;
 		},
+		SET_SELL_PRODUCT(state, action) {
+			state.push(action.payload);
+		},
 	},
 });
 
-export const { SET_PRODUCTS } = productSlice.actions;
+export const { SET_PRODUCTS, SET_SELL_PRODUCT } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -8,12 +8,21 @@ import { SellerSection } from './Seller.style';
 const Seller = () => {
 	const [isRegisterPage, setIsRegisterPage] = useState(true);
 
+	const [inputValue, setInputValue] = useState({});
+
+	const handleProductSubmit = (data) => {
+		setInputValue(data);
+	};
+
 	return (
 		<SellerSection>
 			<SellerNav setIsRegisterPage={setIsRegisterPage} />
-			{isRegisterPage && <SellerMain />}
+			{isRegisterPage && <SellerMain onSubmit={handleProductSubmit} />}
 			{!isRegisterPage && <SellerList />}
-			<SellerButtons setIsRegisterPage={setIsRegisterPage} />
+			<SellerButtons
+				setIsRegisterPage={setIsRegisterPage}
+				inputData={inputValue}
+			/>
 		</SellerSection>
 	);
 };

@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { getUserSellProducts } from '../../../api/productApi';
 import {
 	Button,
 	ButtonsWrap,
@@ -12,145 +14,59 @@ import {
 } from './SellerList.style';
 
 const SellerList = () => {
+	const [sellerProductList, setSellerProductList] = useState([]);
+
+	const fetchGetSellProducts = async () => {
+		const response = await getUserSellProducts();
+
+		console.log(response);
+		setSellerProductList(response);
+	};
+
+	useEffect(() => {
+		fetchGetSellProducts();
+	}, []);
+
 	return (
 		<SellerListContainer>
 			<ul>
-				<SellerListItem>
-					<ImgWrap>
-						<img src="/assets/main1.jpg" alt="" />
-					</ImgWrap>
-					<ItemInfoWrap>
-						<ItemTitle>골드 코인 장식 스웨이드 페니로퍼</ItemTitle>
-						<div>카테고리 : 슈즈</div>
-						<DiscountWrap>
-							<label htmlFor="">할인율</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>%</span>
-						</DiscountWrap>
-						<StockWrap>
-							<label htmlFor="">재고</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>개</span>
-						</StockWrap>
-					</ItemInfoWrap>
-					<PriceAndButtonsWrap>
-						<div>45,500원</div>
-						<ButtonsWrap>
-							<Button>삭제</Button>
-							<Button>저장</Button>
-						</ButtonsWrap>
-					</PriceAndButtonsWrap>
-				</SellerListItem>
-				<SellerListItem>
-					<ImgWrap>
-						<img src="/assets/main1.jpg" alt="" />
-					</ImgWrap>
-					<ItemInfoWrap>
-						<ItemTitle>골드 코인 장식 스웨이드 페니로퍼</ItemTitle>
-						<div>카테고리 : 슈즈</div>
-						<DiscountWrap>
-							<label htmlFor="">할인율</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>%</span>
-						</DiscountWrap>
-						<StockWrap>
-							<label htmlFor="">재고</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>개</span>
-						</StockWrap>
-					</ItemInfoWrap>
-					<PriceAndButtonsWrap>
-						<div>45,500원</div>
-						<ButtonsWrap>
-							<Button>삭제</Button>
-							<Button>저장</Button>
-						</ButtonsWrap>
-					</PriceAndButtonsWrap>
-				</SellerListItem>
-				<SellerListItem>
-					<ImgWrap>
-						<img src="/assets/main1.jpg" alt="" />
-					</ImgWrap>
-					<ItemInfoWrap>
-						<ItemTitle>골드 코인 장식 스웨이드 페니로퍼</ItemTitle>
-						<div>카테고리 : 슈즈</div>
-						<DiscountWrap>
-							<label htmlFor="">할인율</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>%</span>
-						</DiscountWrap>
-						<StockWrap>
-							<label htmlFor="">재고</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>개</span>
-						</StockWrap>
-					</ItemInfoWrap>
-					<PriceAndButtonsWrap>
-						<div>45,500원</div>
-						<ButtonsWrap>
-							<Button>삭제</Button>
-							<Button>저장</Button>
-						</ButtonsWrap>
-					</PriceAndButtonsWrap>
-				</SellerListItem>
-				<SellerListItem>
-					<ImgWrap>
-						<img src="/assets/main1.jpg" alt="" />
-					</ImgWrap>
-					<ItemInfoWrap>
-						<ItemTitle>골드 코인 장식 스웨이드 페니로퍼</ItemTitle>
-						<div>카테고리 : 슈즈</div>
-						<DiscountWrap>
-							<label htmlFor="">할인율</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>%</span>
-						</DiscountWrap>
-						<StockWrap>
-							<label htmlFor="">재고</label>
-							<div>
-								<button>-</button>
-								<input type="text" value="1" />
-								<button>+</button>
-							</div>
-							<span>개</span>
-						</StockWrap>
-					</ItemInfoWrap>
-					<PriceAndButtonsWrap>
-						<div>45,500원</div>
-						<ButtonsWrap>
-							<Button>삭제</Button>
-							<Button>저장</Button>
-						</ButtonsWrap>
-					</PriceAndButtonsWrap>
-				</SellerListItem>
+				{sellerProductList &&
+					sellerProductList.map((product) => (
+						<SellerListItem key={product.productId}>
+							<ImgWrap>
+								<img src="" alt="" />
+							</ImgWrap>
+							<ItemInfoWrap>
+								<ItemTitle>{product.productName}</ItemTitle>
+								<div>카테고리 : {product.category}</div>
+								<DiscountWrap>
+									<label htmlFor="">할인율</label>
+									<div>
+										<button>-</button>
+										<input type="text" value="1" />
+										<button>+</button>
+									</div>
+									<span>%</span>
+								</DiscountWrap>
+								<StockWrap>
+									<label htmlFor="">재고</label>
+									<div>
+										<button>-</button>
+										<input type="text" value={product.productStock} />
+										<button>+</button>
+									</div>
+									<span>개</span>
+								</StockWrap>
+							</ItemInfoWrap>
+							<PriceAndButtonsWrap>
+								<div>{product.productPrice}원</div>
+								<ButtonsWrap>
+									<Button>삭제</Button>
+									<Button>저장</Button>
+								</ButtonsWrap>
+							</PriceAndButtonsWrap>
+						</SellerListItem>
+					))}
 			</ul>
 		</SellerListContainer>
 	);

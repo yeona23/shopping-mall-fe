@@ -32,7 +32,7 @@ class ApiClient {
 				data: method === 'post' || method === 'put' ? data : undefined,
 				headers: {
 					...this.headers,
-					'Authorization': `Bearer ${localToken.get()}`,
+					access_token: `${localToken.get()}`,
 					'Content-Type': 'application/json',
 				},
 				...config,
