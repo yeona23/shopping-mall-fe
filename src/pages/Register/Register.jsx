@@ -120,11 +120,13 @@ const Register = () => {
 						name="name"
 						onChange={inputValueHandler}
 						ref={inputRef}></RegisterInput>
+
 					<RegisterInput
 						type="tel"
 						placeholder="PHONE NUMBER"
-						name="phoneNumber"
+						name="mobile"
 						onChange={inputValueHandler}></RegisterInput>
+
 					<RegisterInput
 						placeholder="ID"
 						type="email"
@@ -134,12 +136,14 @@ const Register = () => {
 					{nameEmailInputIsInValid && (
 						<Paragraph>정확하지 않은 이메일입니다.</Paragraph>
 					)}
+
 					<RegisterInput
 						placeholder="PASSWORD"
 						type="password"
 						name="password"
 						onChange={inputValueHandler}
 						isValid={namePasswordInputIsInValid}></RegisterInput>
+
 					{namePasswordInputIsInValid && (
 						<Paragraph>
 							비밀번호는 영문, 숫자, 특수문자 중 2개 이상을 조합하여 최소 6자리
@@ -149,7 +153,7 @@ const Register = () => {
 					<RegisterInput
 						placeholder="VERIFY PASSWORD"
 						type="password"
-						name="confirmedPassword"
+						name="pwdck"
 						onChange={inputValueHandler}
 						isValid={nameConfirmedPasswordIsInvalid}></RegisterInput>
 					{nameConfirmedPasswordIsInvalid && (

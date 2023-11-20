@@ -89,6 +89,10 @@ const Login = () => {
 		} else setEnteredPasswordIsValid(true);
 
 		if (enteredEmailIsValid && enteredPasswordIsValid) {
+			setInputValue({
+				email: enteredEmail,
+				password: enteredPassword,
+			});
 			try {
 				const response = await loginUser(inputValue);
 

@@ -27,6 +27,8 @@ import {
 	UserWrapper,
 } from './User.style';
 import { useNavigate } from 'react-router';
+import { logoutUser } from '../../../api/AuthApi';
+import localToken from '../../../api/LocalToken';
 
 const User = () => {
 	const [imgFile, setImgFile] = useState('');
