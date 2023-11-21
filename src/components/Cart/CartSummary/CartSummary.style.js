@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const CartSummaryDiv = styled.div`
 	width: 30%;
+	height: auto;
+	position: relative;
 `;
 
 export const CartSummaryTitleH3 = styled.h3`

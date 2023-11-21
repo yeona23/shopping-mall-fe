@@ -8,7 +8,8 @@ import Button from '../CartUI/Button';
 
 const CartSummary = ({ children, btnText }) => {
 	return (
-		<CartSummaryDiv>
+		<CartSummaryDiv
+			style={{ position: 'sticky', top: '60px', right: '0', height: '100%' }}>
 			<CartSummaryTitleH3>Cart Summary</CartSummaryTitleH3>
 			{children}
 			<CartSummaryOptionDiv>

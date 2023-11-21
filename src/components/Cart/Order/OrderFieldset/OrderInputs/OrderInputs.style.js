@@ -32,3 +32,11 @@ export const OrderInput = styled.input`
 		font-family: 'Red Hat Display', sans-serif;
 	}
 `;
+export const ValidDiv = styled.div`
+	width: calc(50% - 4px);
+`;
+export const InvalidP = styled.p`
+	color: red;
+	font-size: 12px;
+	margin-left: 5px;
+`;

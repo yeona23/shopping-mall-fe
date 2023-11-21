@@ -16,6 +16,7 @@ export const CartContentsDiv = styled.div`
 	display: flex;
 	justify-content: space-between;
 	position: relative;
+	height: auto;
 `;
 export const CartItemsDiv = styled.div`
 	width: 65%;
