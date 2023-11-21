@@ -33,6 +33,15 @@ const Register = () => {
 		password: '',
 	});
 
+	const nameEmailInputIsInValid =
+		!emailIsValid && textIsTouched && isSignUpClicked;
+	const namePasswordInputIsInValid =
+		!passwordIsValid && textIsTouched && isSignUpClicked;
+	const nameConfirmedPasswordIsInvalid =
+		textIsTouched &&
+		inputValue.pwdck !== inputValue.password &&
+		isSignUpClicked;
+
 	useEffect(() => {
 		inputRef.current.focus();
 	}, []);
@@ -98,15 +107,6 @@ const Register = () => {
 			setIsSignUpClicked(true);
 		}
 	};
-
-	const nameEmailInputIsInValid =
-		!emailIsValid && textIsTouched && isSignUpClicked;
-	const namePasswordInputIsInValid =
-		!passwordIsValid && textIsTouched && isSignUpClicked;
-	const nameConfirmedPasswordIsInvalid =
-		textIsTouched &&
-		inputValue.pwdck !== inputValue.password &&
-		isSignUpClicked;
 
 	return (
 		<RegisterWrapper>

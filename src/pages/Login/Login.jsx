@@ -47,14 +47,6 @@ const Login = () => {
 		setEnteredPassword(event.target.value);
 	};
 
-	const emailInputBlurHandler = () => {
-		setEnteredEmailIsTouched(true);
-	};
-
-	const passwordInputBlurHandler = () => {
-		SetEnteredPasswordIsTouched(true);
-	};
-
 	const onRegisterClick = () => {
 		navigate('/register');
 	};
@@ -63,17 +55,12 @@ const Login = () => {
 		inputRef.current.focus();
 	}, []);
 
-	const loginUserHandler = async (e) => {
-		e.preventDefault();
-
+	const isValid = async () => {
 		setEnteredEmailIsTouched(true);
 		SetEnteredPasswordIsTouched(true);
 
 		// email 유효성검사
-		if (enteredEmail.trim() === '') {
-			setEnteredEmailIsValid(false);
-		}
-		if (enteredEmail.length > 0 && /^.+@.+\..+$/.test(enteredEmail.value)) {
+		if (enteredEmail.trim().length > 0 && /^.+@.+\..+$/.test(enteredEmail)) {
 			setEnteredEmailIsValid(true);
 		} else {
 			setEnteredEmailIsValid(false);
@@ -87,15 +74,21 @@ const Login = () => {
 		if (enteredPassword.length > 0 && enteredPassword.length < 6) {
 			setEnteredPasswordIsValid(false);
 		} else setEnteredPasswordIsValid(true);
+	};
+
+	const loginUserHandler = async (e) => {
+		e.preventDefault();
+
+		await isValid();
 
 		if (enteredEmailIsValid && enteredPasswordIsValid) {
 			setInputValue({
 				email: enteredEmail,
 				password: enteredPassword,
 			});
+
 			try {
 				const response = await loginUser(inputValue);
-
 				if (!response) return;
 
 				const { access_token } = response;
@@ -128,7 +121,6 @@ const Login = () => {
 						placeholder="ID"
 						type="text"
 						name="email"
-						onBlur={emailInputBlurHandler}
 						onChange={emailInputChangeHandler}
 						ref={inputRef}></LoginInputEmail>
 					{emailInputIsInvalid && (
@@ -139,7 +131,6 @@ const Login = () => {
 						placeholder="PASSWORD"
 						type="password"
 						name="password"
-						onBlur={passwordInputBlurHandler}
 						onChange={passwordInputChangeHandler}></LoginInputPassword>
 					{passwordInputIsInvalid && (
 						<Paragraph>비밀번호는 최소 6자리 이상이어야 합니다.</Paragraph>
