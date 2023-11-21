@@ -98,13 +98,18 @@ const Login = () => {
 
 	const loginUserHandler = async (e) => {
 		e.preventDefault();
-		const response = await loginUser(inputValue);
 
-		console.log(response);
+		try {
+			const response = await loginUser(inputValue);
 
-		const { access_token } = response;
+			console.log(response);
 
-		localToken.save(access_token);
+			const { access_token } = response;
+
+			localToken.save(access_token);
+		} catch (error) {
+			console.error(error.message);
+		}
 	};
 
 	return (

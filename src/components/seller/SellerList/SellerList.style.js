@@ -13,7 +13,7 @@ export const SellerListContainer = styled.div`
 export const SellerListItem = styled.li`
 	display: flex;
 	justify-content: space-around;
-	margin-right: 30px;
+	margin: 0 30px 30px 0;
 `;
 
 export const ImgWrap = styled.div`
@@ -32,6 +32,10 @@ export const ItemInfoWrap = styled.div`
 	flex-direction: column;
 	justify-content: space-around;
 	margin-left: 10px;
+
+	& div {
+		margin-top: 10px;
+	}
 `;
 
 export const PriceAndButtonsWrap = styled.div`

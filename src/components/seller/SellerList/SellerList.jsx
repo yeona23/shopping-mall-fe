@@ -15,17 +15,48 @@ import {
 
 const SellerList = () => {
 	const [sellerProductList, setSellerProductList] = useState([]);
+	const [inputValue, setInputValue] = useState({
+		discount: 1,
+		stock: 0,
+	});
+
+	console.log(sellerProductList);
 
 	const fetchGetSellProducts = async () => {
 		const response = await getUserSellProducts();
 
-		console.log(response);
 		setSellerProductList(response);
 	};
 
 	useEffect(() => {
 		fetchGetSellProducts();
 	}, []);
+
+	const inputChangeHandler = (e) => {
+		const { name, value } = e.target;
+
+		setInputValue({ ...inputValue, [name]: value });
+	};
+
+	const countHandler = (type, label, productId) => {
+		setSellerProductList(
+			sellerProductList.map((product) => {
+				if (product.productId === productId) {
+					let newValue =
+						label === 'discount' ? product.discount : product.productStock;
+					newValue = Math.max(type === 'plus' ? newValue + 1 : newValue - 1, 0);
+					return { ...product, [label]: newValue };
+				}
+				return product;
+			}),
+		);
+	};
+
+	const deleteProductHandler = (productId) => {
+		setSellerProductList(
+			sellerProductList.filter((product) => product.productId !== productId),
+		);
+	};
 
 	return (
 		<SellerListContainer>
@@ -40,28 +71,61 @@ const SellerList = () => {
 								<ItemTitle>{product.productName}</ItemTitle>
 								<div>카테고리 : {product.category}</div>
 								<DiscountWrap>
-									<label htmlFor="">할인율</label>
+									<label htmlFor="discount">할인율</label>
 									<div>
-										<button>-</button>
-										<input type="text" value="1" />
-										<button>+</button>
+										<button
+											onClick={() =>
+												countHandler('minus', 'discount', product.productId)
+											}>
+											-
+										</button>
+										<input
+											type="text"
+											value={inputValue.discount}
+											name="discount"
+											onChange={inputChangeHandler}
+										/>
+										<button
+											onClick={() =>
+												countHandler('plus', 'discount', product.productId)
+											}>
+											+
+										</button>
 									</div>
 									<span>%</span>
 								</DiscountWrap>
 								<StockWrap>
-									<label htmlFor="">재고</label>
+									<label htmlFor="stock">재고</label>
 									<div>
-										<button>-</button>
-										<input type="text" value={product.productStock} />
-										<button>+</button>
+										<button
+											onClick={() =>
+												countHandler('minus', 'productStock', product.productId)
+											}>
+											-
+										</button>
+										<input
+											type="text"
+											value={product.productStock}
+											name="stock"
+											onChange={inputChangeHandler}
+										/>
+										<button
+											onClick={() =>
+												countHandler('plus', 'productStock', product.productId)
+											}>
+											+
+										</button>
 									</div>
 									<span>개</span>
 								</StockWrap>
 							</ItemInfoWrap>
 							<PriceAndButtonsWrap>
-								<div>{product.productPrice}원</div>
+								<div>{product.productPrice?.toLocaleString()}원</div>
 								<ButtonsWrap>
-									<Button>삭제</Button>
+									<Button
+										onClick={() => deleteProductHandler(product.productId)}>
+										삭제
+									</Button>
 									<Button>저장</Button>
 								</ButtonsWrap>
 							</PriceAndButtonsWrap>
