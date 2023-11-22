@@ -32,7 +32,7 @@ const Nav = () => {
 		navigate(url);
 	};
 
-	const onUserClick = () => {
+	const onSignInClick = () => {
 		navigate('/login');
 	};
 
@@ -89,7 +89,7 @@ const Nav = () => {
 					</NavUl>
 				</div>
 				<UserContent>
-					<span>SIGN IN</span>
+					<span onClick={onSignInClick}>SIGN IN</span>
 					<BsCart4 color="var(--color-main-text)" size={20} />
 				</UserContent>
 			</HeaderNav>
