@@ -5,7 +5,7 @@ import App from './App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
+import Register from './pages/Register/Register/Register';
 import Cart from './pages/Cart/Cart';
 import Users from './pages/Users/Users';
 import Products from './pages/Products/Products';
