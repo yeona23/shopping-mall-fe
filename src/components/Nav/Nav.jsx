@@ -11,6 +11,7 @@ import {
 import { BsCart4 } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
+import ResponseNav from './ResponseNav';
 
 const Nav = () => {
 	const navigate = useNavigate();
@@ -82,7 +83,7 @@ const Nav = () => {
 							ACC
 							<NavDropdown
 								type="acc"
-								subTypes={['shoes', 'socks', 'etc']}
+								subTypes={['shoes', 'bag', 'etc']}
 								onItemClick={onItemClick}
 							/>
 						</NavLi>
@@ -93,6 +94,7 @@ const Nav = () => {
 					<BsCart4 color="var(--color-main-text)" size={20} />
 				</UserContent>
 			</HeaderNav>
+			<ResponseNav />
 		</Header>
 	);
 };
