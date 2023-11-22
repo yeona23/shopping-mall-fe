@@ -79,6 +79,9 @@ const Login = () => {
 					navigate('/');
 				}
 			} catch (error) {
+				if (error.response.code === 'ERR_NETWORK') {
+					console.log('테스트');
+				}
 				if (error.response.status === '403') {
 					console.error(error.message);
 				}

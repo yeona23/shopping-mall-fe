@@ -28,6 +28,7 @@ export const RegisterTitleDiv = styled.div`
 	margin-bottom: 16px;
 	color: #434343;
 	line-height: 39.69px;
+	cursor: default;
 `;
 
 export const RegisterInput = styled.input.attrs({
@@ -54,7 +55,7 @@ export const RegisterForm = styled.form`
 `;
 
 export const RegisterButton = styled.button`
-	background-color: #5d2510;
+	background-color: rgba(93, 37, 16, 0.9);
 	color: #ede1d2;
 	border: 1px solid #5d2510;
 	padding: 8px, 52px, 8px, 52px;
@@ -65,6 +66,9 @@ export const RegisterButton = styled.button`
 	margin-top: 16px;
 	&:hover {
 		cursor: pointer;
+	}
+	&:active {
+		background-color: rgba(93, 37, 16, 1);
 	}
 `;
 
@@ -90,6 +94,13 @@ export const SnsIconDiv = styled.div`
 `;
 
 export const Paragraph = styled.p`
+	width: 90%;
+	text-align: left;
+	font-size: 12px;
+	color: tomato;
+`;
+
+export const ExParagraph = styled.p`
 	width: 90%;
 	text-align: left;
 	font-size: 12px;
