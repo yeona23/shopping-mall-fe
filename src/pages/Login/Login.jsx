@@ -96,22 +96,6 @@ const Login = () => {
 	const namePasswordInputIsInValid =
 		!passwordIsValid && textIsTouched && isSignInClicked;
 
-	const loginUserHandler = async (e) => {
-		e.preventDefault();
-
-		try {
-			const response = await loginUser(inputValue);
-
-			console.log(response);
-
-			const { access_token } = response;
-
-			localToken.save(access_token);
-		} catch (error) {
-			console.error(error.message);
-		}
-	};
-
 	return (
 		<LoginWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
