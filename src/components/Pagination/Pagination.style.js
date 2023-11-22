@@ -1,4 +1,4 @@
-import { styled, css } from 'styled-components';
+import { styled } from 'styled-components';
 
 export const PaginationBox = styled.div`
 	width: 100%;
@@ -44,7 +44,7 @@ export const FTDropdown = styled.div`
 	position: absolute;
 	top: 120%;
 	right: 0px;
-	background: #ffffff;
+	background: #fff;
 	padding-left: 20px;
 	z-index: 100;
 	border: ${(props) =>

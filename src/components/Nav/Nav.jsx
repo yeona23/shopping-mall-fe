@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	DropLi,
 	Dropdown,
@@ -9,53 +9,78 @@ import {
 	UserContent,
 } from './Nav.style';
 import { BsCart4 } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import NavDropdown from './NavDropdown';
 
 const Nav = () => {
+	const navigate = useNavigate();
+	const [selectedLi, setSelectedLi] = useState(null);
+
+	const onHomeClick = () => {
+		navigate('/');
+	};
+
+	const clickNavHandler = (type) => {
+		setSelectedLi(type);
+		const url = `/products/?type=${type}`;
+		navigate(url);
+	};
+
+	const onItemClick = (type, subType) => {
+		setSelectedLi(type);
+		const url = `/products/?type=${type}&subType=${subType}`;
+		navigate(url);
+	};
+
 	return (
 		<Header>
 			<HeaderNav>
 				<div>
-					<img src="/assets/main-logo.svg" alt="mainLogo" />
+					<img
+						src="/assets/main-logo.svg"
+						alt="mainLogo"
+						onClick={onHomeClick}
+					/>
 					<NavUl>
-						<NavLi>NEW</NavLi>
-						<NavLi>
+						<NavLi onClick={() => clickNavHandler('new')}>
+							NEW
+							<NavDropdown
+								type="new"
+								subTypes={['outer', 'top', 'bottom', 'acc']}
+								onItemClick={onItemClick}
+							/>
+						</NavLi>
+						<NavLi onClick={() => clickNavHandler('outer')}>
 							OUTER
-							<Dropdown>
-								<DropLi>jacket</DropLi>
-								<DropLi>coat</DropLi>
-								<DropLi>cardigan</DropLi>
-							</Dropdown>
+							<NavDropdown
+								type="outer"
+								subTypes={['jacket', 'coat', 'cardigan']}
+								onItemClick={onItemClick}
+							/>
 						</NavLi>
-						<NavLi>
-							DRESS
-							<Dropdown>
-								<DropLi>jacket</DropLi>
-								<DropLi>coat</DropLi>
-								<DropLi>cardigan</DropLi>
-							</Dropdown>
-						</NavLi>
-						<NavLi>
+						<NavLi onClick={() => clickNavHandler('top')}>
 							TOP
-							<Dropdown>
-								<DropLi>knit</DropLi>
-								<DropLi>shirts</DropLi>
-								<DropLi>blouse</DropLi>
-							</Dropdown>
+							<NavDropdown
+								type="top"
+								subTypes={['knit', 'shirts', 'blouse']}
+								onItemClick={onItemClick}
+							/>
 						</NavLi>
-						<NavLi>
+						<NavLi onClick={() => clickNavHandler('bottom')}>
 							BOTTOM
-							<Dropdown>
-								<DropLi>pants</DropLi>
-								<DropLi>skirt</DropLi>
-							</Dropdown>
+							<NavDropdown
+								type="bottom"
+								subTypes={['pants', 'skirt']}
+								onItemClick={onItemClick}
+							/>
 						</NavLi>
-						<NavLi>
+						<NavLi onClick={() => clickNavHandler('acc')}>
 							ACC
-							<Dropdown>
-								<DropLi>shoes</DropLi>
-								<DropLi>socks</DropLi>
-								<DropLi>etc</DropLi>
-							</Dropdown>
+							<NavDropdown
+								type="acc"
+								subTypes={['shoes', 'socks', 'etc']}
+								onItemClick={onItemClick}
+							/>
 						</NavLi>
 					</NavUl>
 				</div>

@@ -9,6 +9,9 @@ export const Header = styled.div`
 	left: 0;
 	z-index: 10000;
 	top: 0;
+	&:hover {
+		background: var(--color-coconut);
+	}
 `;
 
 export const HeaderNav = styled.div`
@@ -26,12 +29,21 @@ export const HeaderNav = styled.div`
 	}
 	& img {
 		height: 26px;
+		cursor: pointer;
 	}
 `;
 export const NavUl = styled.ul`
 	display: flex;
 	align-items: center;
 	gap: 35px;
+
+	& > li:first-child:hover ul {
+		height: 170px;
+	}
+
+	& > li:first-child ul {
+		text-transform: uppercase;
+	}
 `;
 
 export const NavLi = styled.li`
@@ -56,7 +68,13 @@ export const Dropdown = styled.ul`
 	transition: all 0.6s;
 	overflow: hidden;
 	top: 38px;
-	left: 0px;
+	left: 50%;
+	transform: translateX(-50%);
+
+	&:hover {
+		background: var(--color-coconut);
+	}
+
 	& li:first-child {
 		margin-top: 20px;
 	}
@@ -66,8 +84,11 @@ export const DropLi = styled.li`
 	display: flex;
 	flex-direction: column;
 	font-size: 14px;
+	color: var(--color-natural);
+
 	&:hover {
-		color: var(--color-coconut);
+		color: var(--color-main-text);
+		font-weight: 500;
 	}
 `;
 
