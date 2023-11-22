@@ -1,22 +1,17 @@
 import { useEffect, useState } from 'react';
 import { SellerMainContainer } from './SellerMain.style';
-import { SET_SELL_PRODUCT } from '../../../slice/productSlice';
-import { useSelector } from 'react-redux';
 
-const SellerMain = ({ onSubmit }) => {
+const SellerMain = ({ onSubmit, onReset }) => {
 	const [inputValue, setInputValue] = useState({});
 
 	const inputImageHandler = (e) => {
 		const { name, files } = e.target;
-		setInputValue({ ...inputValue, [name]: files[0].name });
+		setInputValue({ ...inputValue, [name]: files[0] });
 	};
 
 	const inputDetailImageHandler = (e) => {
 		const { name, files } = e.target;
-		const filesArray = Array.from(files);
-		const filesMap = filesArray.map((file) => file.name);
-
-		setInputValue({ ...inputValue, [name]: filesMap });
+		setInputValue({ ...inputValue, [name]: files });
 	};
 
 	const inputChangeHandler = (e) => {
@@ -28,6 +23,10 @@ const SellerMain = ({ onSubmit }) => {
 	useEffect(() => {
 		onSubmit(inputValue);
 	}, [inputValue]);
+
+	useEffect(() => {
+		onReset(() => setInputValue({}));
+	}, []);
 
 	return (
 		<SellerMainContainer>

@@ -1,31 +1,59 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { registerProduct } from '../../../api/productApi';
 import { ButtonWrap } from './SellerButtons.style';
 import { SET_SELL_PRODUCT } from '../../../slice/productSlice';
 
-const SellerButtons = ({ setIsRegisterPage, inputData }) => {
+const SellerButtons = ({
+	isRegisterPage,
+	setIsRegisterPage,
+	inputData,
+	onResetInputFields,
+}) => {
 	const lookupListHandler = () => {
 		setIsRegisterPage(false);
 	};
 
 	const dispatch = useDispatch();
 
-	console.log(inputData);
-
 	const fetchRegisterProduct = async () => {
-		const response = await registerProduct(inputData);
+		try {
+			if (Object.keys(inputData).length > 7) {
+				const response = await registerProduct(inputData);
 
-		console.log(response);
+				if (response) {
+					setIsRegisterPage(false);
+					onResetInputFields();
+				}
+			} else {
+				if (isRegisterPage) {
+					alert('모든 항목을 입력해주세요.');
+				}
+			}
+		} catch (error) {
+			console.error(error.message);
+		}
 	};
 
 	const registerProductHandler = () => {
-		fetchRegisterProduct();
-		dispatch(SET_SELL_PRODUCT(inputData));
+		try {
+			if (!isRegisterPage) {
+				if (Object.keys(inputData).length <= 7) {
+					setIsRegisterPage(true);
+				}
+			} else {
+				if (Object.keys(inputData).length > 7) {
+					onResetInputFields();
+				}
+			}
+
+			fetchRegisterProduct();
+
+			dispatch(SET_SELL_PRODUCT(inputData));
+		} catch (error) {
+			setIsRegisterPage(true);
+			console.error(error.message);
+		}
 	};
-
-	const productsData = useSelector((state) => state.product);
-
-	console.log(productsData);
 
 	return (
 		<ButtonWrap>

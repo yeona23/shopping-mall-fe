@@ -20,8 +20,6 @@ const SellerList = () => {
 		stock: 0,
 	});
 
-	console.log(sellerProductList);
-
 	const fetchGetSellProducts = async () => {
 		const response = await getUserSellProducts();
 

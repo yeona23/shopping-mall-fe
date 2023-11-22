@@ -25,16 +25,21 @@ class ApiClient {
 	}
 
 	request(method, url, data, config) {
+		const headers = {
+			...this.headers,
+			access_token: `${localToken.get()}`,
+		};
+
+		if (!(data instanceof FormData)) {
+			headers['Content-Type'] = 'application/json';
+		}
+
 		return this.api
 			.request({
 				method,
 				url,
 				data: method === 'post' || method === 'put' ? data : undefined,
-				headers: {
-					...this.headers,
-					access_token: `${localToken.get()}`,
-					'Content-Type': 'application/json',
-				},
+				headers,
 				...config,
 			})
 			.then((res) => res.data)
