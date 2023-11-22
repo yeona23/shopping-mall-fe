@@ -1,5 +1,4 @@
 import ApiClient from './ApiClient';
-import localToken from './LocalToken';
 
 const REGISTER = '/register';
 const GET_ALL = '/getAll';
@@ -23,8 +22,6 @@ export const getUserSellProducts = async () => {
 };
 
 export const registerProduct = async (body) => {
-	const token = localToken.get();
-
 	return await productApi.post(REGISTER, {
 		productName: body.name,
 		productPrice: Number(body.price),

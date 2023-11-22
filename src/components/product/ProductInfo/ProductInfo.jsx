@@ -17,6 +17,7 @@ import {
 } from './ProductInfo.style';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getCartProducts, registerCartProduct } from '../../../api/cartApi';
 
 const ProductInfo = () => {
 	const { productId } = useParams();
@@ -99,7 +100,23 @@ const ProductInfo = () => {
 		0,
 	);
 
+	const fetchRegisterCartProduct = async () => {
+		const response = await registerCartProduct(productId, addedItems[0]);
+
+		console.log(response);
+	};
+
+	const fetchCartProducts = async () => {
+		const response = await getCartProducts();
+		console.log(response);
+	};
+
+	useEffect(() => {
+		fetchCartProducts();
+	}, []);
+
 	const moveToTheCartPage = () => {
+		fetchRegisterCartProduct();
 		navigate('/cart');
 	};
 
@@ -138,7 +155,7 @@ const ProductInfo = () => {
 			<SelectWrap>
 				<div>사이즈</div>
 				<div>
-					<select name="" id="" onChange={sizeValueHandler}>
+					<select name="size" id="" onChange={sizeValueHandler}>
 						<option value="">- [필수] 사이즈를 선택해주세요 -</option>
 						<option value="" disabled>
 							---------------------
