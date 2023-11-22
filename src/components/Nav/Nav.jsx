@@ -32,6 +32,10 @@ const Nav = () => {
 		navigate(url);
 	};
 
+	const onUserClick = () => {
+		navigate('/login');
+	};
+
 	return (
 		<Header>
 			<HeaderNav>

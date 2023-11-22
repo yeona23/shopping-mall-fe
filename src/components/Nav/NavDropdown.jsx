@@ -1,12 +1,15 @@
 import React from 'react';
 import { DropLi, Dropdown } from './Nav.style';
-import { useNavigate } from 'react-router-dom';
 
 const NavDropdown = ({ type, subTypes = [], onItemClick }) => {
-	const navigate = useNavigate();
+	const onClickDropUl = () => null;
 
 	return (
-		<Dropdown>
+		<Dropdown
+			onClick={(e) => {
+				e.stopPropagation();
+				onClickDropUl();
+			}}>
 			{subTypes.map((subType) => (
 				<DropLi
 					key={subType}
