@@ -9,7 +9,7 @@ import {
 	Overlay,
 	TitleDiv,
 } from './DeleteModal.style';
-import { signoutUser } from '../../../api/AuthApi';
+import { signoutUser } from '../../../api/authApi';
 import localToken from '../../../api/LocalToken';
 
 const DeleteModal = (props) => {

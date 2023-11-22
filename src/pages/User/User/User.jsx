@@ -27,7 +27,7 @@ import {
 	UserWrapper,
 } from './User.style';
 import { useNavigate } from 'react-router';
-import { logoutUser } from '../../../api/AuthApi';
+import { logoutUser } from '../../../api/authApi';
 import localToken from '../../../api/LocalToken';
 
 const User = () => {

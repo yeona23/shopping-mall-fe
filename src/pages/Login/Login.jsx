@@ -14,7 +14,7 @@ import {
 	SignUpButton,
 	SignUpDiv,
 } from './Login.style';
-import { loginUser } from '../../api/AuthApi';
+import { loginUser } from '../../api/authApi';
 import localToken from '../../api/LocalToken';
 
 const Login = () => {

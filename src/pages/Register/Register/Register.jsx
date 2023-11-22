@@ -13,7 +13,7 @@ import {
 	RegisterWrapper,
 	SnsIconDiv,
 } from './Register.style';
-import { registerUser } from '../../../api/AuthApi';
+import { registerUser } from '../../../api/authApi';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
