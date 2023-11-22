@@ -37,10 +37,6 @@ const Nav = () => {
 		navigate('/login');
 	};
 
-	const cartClickHandler = () => {
-		navigate('/cart');
-	};
-
 	return (
 		<Header>
 			<HeaderNav>
@@ -95,11 +91,7 @@ const Nav = () => {
 				</div>
 				<UserContent>
 					<span onClick={onSignInClick}>SIGN IN</span>
-					<BsCart4
-						color="var(--color-main-text)"
-						size={20}
-						onClick={cartClickHandler}
-					/>
+					<BsCart4 color="var(--color-main-text)" size={20} />
 				</UserContent>
 			</HeaderNav>
 			<ResponseNav />
