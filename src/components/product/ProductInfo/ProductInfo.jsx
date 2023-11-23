@@ -15,14 +15,24 @@ import {
 	Title,
 	TotalPriceWrap,
 } from './ProductInfo.style';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getCartProducts, registerCartProduct } from '../../../api/cartApi';
 
 const ProductInfo = () => {
-	const PRICE = 65000;
-	const DISCOUNT = 30;
-	const formattedPrice = PRICE.toLocaleString();
-	const discountPrice = (PRICE * (100 - DISCOUNT)) / 100;
-	const formattedDiscountPrice = discountPrice.toLocaleString();
+	const { productId } = useParams();
+
+	const productsData = useSelector((state) => state.product);
+
+	const productIdData = productsData.find(
+		(product) => String(product.id) === String(productId),
+	);
+
+	const PRICE = productIdData?.price;
+	const DISCOUNT = productIdData?.discount;
+	const formattedPrice = PRICE?.toLocaleString();
+	const discountPrice = Math.round((PRICE * (100 - DISCOUNT)) / 10000) * 100;
+	const formattedDiscountPrice = discountPrice?.toLocaleString();
 
 	const [color, setColor] = useState('');
 	const [size, setSize] = useState('');
@@ -46,7 +56,13 @@ const ProductInfo = () => {
 			);
 
 			if (!isItemDuplicate) {
-				const newItem = { id: nextId, color: color, size: size, count: 1 };
+				const newItem = {
+					productId,
+					id: nextId,
+					color: color,
+					size: size,
+					count: 1,
+				};
 				setAddedItems([...addedItems, newItem]);
 				setNextId(nextId + 1);
 			} else {
@@ -84,7 +100,23 @@ const ProductInfo = () => {
 		0,
 	);
 
+	const fetchRegisterCartProduct = async () => {
+		const response = await registerCartProduct(productId, addedItems[0]);
+
+		console.log(response);
+	};
+
+	const fetchCartProducts = async () => {
+		const response = await getCartProducts();
+		console.log(response);
+	};
+
+	useEffect(() => {
+		fetchCartProducts();
+	}, []);
+
 	const moveToTheCartPage = () => {
+		fetchRegisterCartProduct();
 		navigate('/cart');
 	};
 
@@ -94,7 +126,7 @@ const ProductInfo = () => {
 
 	return (
 		<InfoArticle>
-			<Title>골드 코인 장식 스웨이드 페니로퍼</Title>
+			<Title>{productIdData?.name}</Title>
 			<PriceWrap>
 				<BasePrice>{formattedPrice}</BasePrice>
 				<span> / </span>
@@ -110,17 +142,20 @@ const ProductInfo = () => {
 					<select name="color" id="color" onChange={colorValueHandler}>
 						<option value="">- [필수] 색상을 선택해주세요 -</option>
 						<option disabled>---------------------</option>
-						<option value="white">White</option>
-						<option value="black">Black</option>
 						<option value="brown">Brown</option>
+						<option value="black">Black</option>
 						<option value="beige">Beige</option>
+						<option value="white">White</option>
+						<option value="ivory">Ivory</option>
+						<option value="navy">Navy</option>
+						<option value="gray">Gray</option>
 					</select>
 				</div>
 			</SelectWrap>
 			<SelectWrap>
 				<div>사이즈</div>
 				<div>
-					<select name="" id="" onChange={sizeValueHandler}>
+					<select name="size" id="" onChange={sizeValueHandler}>
 						<option value="">- [필수] 사이즈를 선택해주세요 -</option>
 						<option value="" disabled>
 							---------------------

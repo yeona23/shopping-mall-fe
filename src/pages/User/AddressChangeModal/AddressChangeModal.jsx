@@ -8,7 +8,7 @@ import {
 	ModalWrap,
 	Overlay,
 	TitleDiv,
-} from './AddressChangeModal.styel';
+} from './AddressChangeModal.style';
 
 const AddressChangeModal = (props) => {
 	const { onClose } = props;

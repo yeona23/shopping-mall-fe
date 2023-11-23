@@ -49,7 +49,7 @@ export const LoginForm = styled.form`
 `;
 
 export const LoginButton = styled.button`
-	background-color: #5d2510;
+	background-color: rgba(93, 37, 16, 0.9);
 	color: #ede1d2;
 	border: 1px solid #5d2510;
 	padding: 8px, 52px, 8px, 52px;
@@ -60,6 +60,9 @@ export const LoginButton = styled.button`
 
 	&:hover {
 		cursor: pointer;
+	}
+	&:active {
+		background-color: rgba(93, 37, 16, 1);
 	}
 `;
 
@@ -97,7 +100,10 @@ export const SignUpButton = styled.button`
 `;
 
 export const Paragraph = styled.p`
+	margin-top: -10px;
+	margin-bottom: 5px;
 	width: 90%;
 	text-align: left;
 	font-size: 12px;
+	color: tomato;
 `;
