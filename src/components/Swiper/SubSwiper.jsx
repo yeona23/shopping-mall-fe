@@ -4,7 +4,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { CategoryTitle, SubSwiperContainer } from './Swiper.style';
 import { MoreBtn } from '../Main/Main.style';
-import { subItemBox } from './Swiper.style';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const generateImgUrl = (dataTitle, index) => {
 	const maxIndex = 4;
@@ -24,6 +25,9 @@ const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
 );
 
 const SubSwiper = ({ dataTitle }) => {
+	const navigate = useNavigate();
+	const [clickTypeBtn, setClickTypeBtn] = useState();
+
 	const items = Array.from({ length: 10 }, (_, index) => ({
 		id: index + 1,
 		index: index + 1,
@@ -31,9 +35,14 @@ const SubSwiper = ({ dataTitle }) => {
 		price: '65,000won',
 	}));
 
+	const clickTypeNewHandler = () => {
+		const url = '/products/?type=new';
+		navigate(url);
+	};
+
 	return (
 		<SubSwiperContainer>
-			<CategoryTitle>{dataTitle}</CategoryTitle>
+			<CategoryTitle>{dataTitle.toUpperCase()}</CategoryTitle>
 			<Swiper
 				loop={false}
 				spaceBetween={20}
@@ -53,7 +62,7 @@ const SubSwiper = ({ dataTitle }) => {
 					))}
 				</div>
 			</Swiper>
-			<MoreBtn>MORE</MoreBtn>
+			<MoreBtn onClick={clickTypeNewHandler}>MORE</MoreBtn>
 		</SubSwiperContainer>
 	);
 };
