@@ -39,6 +39,7 @@ export const ItemQuantityBtn = styled.button`
 	width: 30%;
 	background: #fff;
 	border: none;
+	cursor: pointer;
 	.plus-minus {
 		width: 20px;
 		height: 20px;

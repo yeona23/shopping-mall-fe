@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CartItemCheckInput } from '../../../pages/Cart/Cart.style';
 import { CartHeaderDiv } from './CartHeader.style';
 import { FiCheck } from 'react-icons/fi';
-import CheckboxInput from './../CartUI/CheckboxInput';
 
 const CartHeader = ({ checkedAllItemHandler, cartItem, checkedItemsId }) => {
 	const allCheckboxHandler = (e) => {
 		checkedAllItemHandler(e.target.checked);
 	};
-
 	return (
 		<CartHeaderDiv>
 			<div>
