@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { useRef, useState } from 'react';
 import AddressChangeModal from '../AddressChangeModal/AddressChangeModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
@@ -9,16 +8,21 @@ import {
 	DeleteYourAccountDiv,
 	GenderDiv,
 	ModalDiv,
+	ModalDivHidden,
+	OnlySellerDiv,
 	ProductRegisterButton,
+	ProfileDiv,
 	ProfileImg,
 	ProfileImgDiv,
 	ProfileImgInput,
 	ProfileImgLabel,
+	ProfileLabelDiv,
 	SignOutDiv,
 	UserBox,
 	UserContent,
 	UserItemContentDiv,
 	UserItemDiv,
+	UserItemDivRight,
 	UserItemTitleDiv,
 	UserLeftItemDiv,
 	UserNamePhotoDiv,
@@ -36,12 +40,23 @@ const User = () => {
 	const navigate = useNavigate();
 
 	const saveImgFile = () => {
-		const file = imgRef.current.files[0];
+		const selectedFile = imgRef.current.files[0];
+		if (!selectedFile) {
+			console.log('파일이 선택되지 않았습니다.');
+			return; // 파일이 선택되지 않은 경우 함수 종료
+		}
+
+		if (!(selectedFile instanceof Blob)) {
+			console.error('선택된 파일이 유효한 파일 또는 Blob 객체가 아닙니다.');
+			return; // 유효하지 않은 파일인 경우 함수 종료
+		}
+
 		const reader = new FileReader();
-		reader.readAsDataURL(file);
+		reader.readAsDataURL(selectedFile);
 		reader.onloadend = () => {
 			setImgFile(reader.result);
 		};
+		console.log(imgFile);
 	};
 
 	const [deleteIsOpen, deleteSetIsOpen] = useState(false);
@@ -75,41 +90,35 @@ const User = () => {
 		}
 	};
 
-	const defaultUserImage = '/assets/icons/icon-user.png';
-
 	return (
 		<UserWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
 			<UserBox>
 				<UserContent>
 					<UserItemDiv>
-						<UserNamePhotoDiv>
-							<UserPhotoDiv>
-								<ProfileImgDiv>
-									<ProfileImg
-										src={
-											imgFile
-												? imgFile
-												: `/images/icon/user.png` || defaultUserImage
-										}
-										alt=""
-									/>
-								</ProfileImgDiv>
-								<ProfileImgLabel
-									className="signup-profileImg-label"
-									htmlFor="profileImg">
-									Image select
-								</ProfileImgLabel>
-								<ProfileImgInput
-									className="signup-profileImg-input"
-									type="file"
-									accept="image/*"
-									id="profileImg"
-									onChange={saveImgFile}
-									ref={imgRef}
-								/>
-							</UserPhotoDiv>
-						</UserNamePhotoDiv>
+						<ProfileImgDiv>
+							<ProfileImg
+								src={imgFile ? imgFile : `/assets/icons/icon-user.png`}
+								alt=""
+								onClick={() => {
+									imgRef.current.click();
+								}}
+							/>
+							<ProfileImgInput
+								className="signup-profileImg-input"
+								type="file"
+								accept="image/jpg,image/png,image/jpeg"
+								id="profileImg"
+								onChange={saveImgFile}
+								ref={imgRef}
+							/>
+						</ProfileImgDiv>
+
+						<UserLeftItemDiv>
+							<UserItemTitleDiv>e-mail</UserItemTitleDiv>
+							<UserItemContentDiv>asdasd@asdasd.com</UserItemContentDiv>
+							<ModalDivHidden>change</ModalDivHidden>
+						</UserLeftItemDiv>
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>address</UserItemTitleDiv>
 							<UserItemContentDiv>
@@ -125,11 +134,7 @@ const User = () => {
 								/>
 							)}
 						</UserLeftItemDiv>
-						<UserLeftItemDiv>
-							<UserItemTitleDiv>e-mail</UserItemTitleDiv>
-							<UserItemContentDiv>asdasd@asdasd.com</UserItemContentDiv>
-							<ModalDiv>change</ModalDiv>
-						</UserLeftItemDiv>
+
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>phone number</UserItemTitleDiv>
 							<UserItemContentDiv>010-000-00000</UserItemContentDiv>
@@ -157,7 +162,7 @@ const User = () => {
 							)}
 						</UserLeftItemDiv>
 					</UserItemDiv>
-					<UserItemDiv>
+					<UserItemDivRight>
 						<UserRightItemDiv>
 							<div>name</div>
 							<div>조영상</div>
@@ -169,11 +174,11 @@ const User = () => {
 								<div>여</div>
 							</GenderDiv>
 						</UserRightItemDiv>
-						<UserRightItemDiv>
+						<OnlySellerDiv>
 							<div>ONLY SELLER</div>
-						</UserRightItemDiv>
+						</OnlySellerDiv>
 						<ProductRegisterButton>PRODUCT REGISTRATION</ProductRegisterButton>
-					</UserItemDiv>
+					</UserItemDivRight>
 				</UserContent>
 				<UserContent>
 					<div>

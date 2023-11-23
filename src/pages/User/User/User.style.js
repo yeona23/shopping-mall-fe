@@ -7,6 +7,9 @@ export const UserWrapper = styled.body`
 	width: 100%;
 	height: 100vh;
 	flex-direction: column;
+	@media screen and (max-width: 1250px) {
+		height: 150vh;
+	}
 `;
 
 export const UserBox = styled.div`
@@ -30,22 +33,26 @@ export const AccountDiv = styled.div`
 `;
 
 export const UserContent = styled.div`
-	padding-top: 30px;
 	width: 90%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	@media screen and (max-width: 1250px) {
+		flex-direction: column;
+	}
 `;
 
 export const UserNamePhotoDiv = styled.div`
 	display: flex;
-	position: absolute;
-	top: 160px;
 `;
 
 export const UserPhotoDiv = styled.div`
-	width: 100px;
-	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
 `;
 
 export const UserNameDiv = styled.div`
@@ -62,7 +69,17 @@ export const UserNameDiv = styled.div`
 
 export const UserItemDiv = styled.div`
 	flex-direction: column;
-	padding-top: 200px;
+	padding-top: 100px;
+	@media screen and (max-width: 1250px) {
+		padding-top: 30px;
+	}
+`;
+
+export const UserItemDivRight = styled(UserItemDiv)`
+	margin-top: 200px;
+	@media screen and (max-width: 1250px) {
+		margin-top: 0px;
+	}
 `;
 
 export const UserLeftItemDiv = styled.div`
@@ -87,6 +104,15 @@ export const UserRightItemDiv = styled.div`
 	align-items: center;
 	margin-top: 16px;
 	padding-right: 8px;
+	@media screen and (max-width: 1250px) {
+		width: 782px;
+	}
+`;
+
+export const OnlySellerDiv = styled(UserRightItemDiv)`
+	@media screen and (max-width: 1250px) {
+		justify-content: center;
+	}
 `;
 
 export const UserItemTitleDiv = styled.div`
@@ -114,6 +140,10 @@ export const ProductRegisterButton = styled.button`
 	&:hover {
 		cursor: pointer;
 	}
+	@media screen and (max-width: 1250px) {
+		height: 56px;
+		width: 782px;
+	}
 `;
 
 export const SignOutDiv = styled.div`
@@ -123,6 +153,10 @@ export const SignOutDiv = styled.div`
 	font-size: 18px;
 	&:hover {
 		cursor: pointer;
+	}
+	@media screen and (max-width: 1250px) {
+		margin-top: 0px;
+		padding-top: 100px;
 	}
 `;
 export const DeleteYourAccountDiv = styled.div`
@@ -139,23 +173,19 @@ export const ProfileImg = styled.img`
 	object-fit: cover;
 `;
 export const ProfileImgDiv = styled.div`
-	width: 100px;
-	height: 100px;
-	border-radius: 50px;
+	margin-bottom: 70px;
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: transparent;
 	overflow: hidden;
-	border: 2px solid var(--color-main-text);
-`;
-
-export const ProfileImgLabel = styled.label`
-	margin: 5px 0 20px 0;
-	font-size: 16px;
-	color: var(--color-main-text);
-	display: inline-block;
-	cursor: pointer;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export const ProfileImgInput = styled.input`
@@ -167,6 +197,15 @@ export const ModalDiv = styled.div`
 		cursor: pointer;
 	}
 `;
+
+export const ProfileLabelDiv = styled.div`
+	bottom: 0;
+`;
+
+export const ModalDivHidden = styled.div`
+	opacity: 0;
+`;
+
 export const GenderDiv = styled.div`
 	width: 60px;
 	height: 30px;

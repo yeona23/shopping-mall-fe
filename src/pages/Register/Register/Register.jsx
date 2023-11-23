@@ -42,7 +42,7 @@ const Register = () => {
 	const [pwdckIsTouched, setPwdckIsTouched] = useState(false);
 
 	const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
-	const [allIsValid, setAllisValid] = useState(false);
+	const [allIsValid, setAllIsValid] = useState(false);
 	const [textIsTouched, setTextIsTouched] = useState(false);
 
 	const [inputValue, setInputValue] = useState({
@@ -178,7 +178,7 @@ const Register = () => {
 			passwordIsValid &&
 			pwdckIsValid
 		) {
-			setAllisValid(true);
+			setAllIsValid(true);
 		}
 	};
 
@@ -260,8 +260,8 @@ const Register = () => {
 						onChange={inputValueHandler}></RegisterInput>
 					{namePasswordInputIsInValid && (
 						<Paragraph>
-							비밀번호는 영문, 숫자, 특수문자 중 2개 이상을 조합하여 최소 6자리
-							이상이여야 합니다.
+							영문, 숫자, 특수문자 중 2개 이상을 조합하여 최소 6자리 이상이여야
+							합니다.
 						</Paragraph>
 					)}
 					{passwordOnFocus && (
