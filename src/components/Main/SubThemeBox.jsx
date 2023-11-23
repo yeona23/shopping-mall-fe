@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ItemBox } from '../Pagination/ProductsBox/ProductsBox.style';
 import {
 	MoreBtn,
@@ -6,6 +6,7 @@ import {
 	SubThemeList,
 	SubThemeTitle,
 } from './Main.style';
+import { useNavigate } from 'react-router-dom';
 
 const generateImgUrl = (dataTitle, index) => {
 	const maxIndex = 4;
@@ -25,8 +26,11 @@ const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
 );
 
 const SubThemeBox = ({ dataTitle }) => {
+	const navigate = useNavigate();
+	const [clickTypeBtn, setClickTypeBtn] = useState();
+
 	let backgroundColor = '';
-	if (dataTitle === 'OUTER' || dataTitle === 'BOTTOM') {
+	if (dataTitle === 'outer' || dataTitle === 'bottom') {
 		backgroundColor = 'var(--color-coconut)';
 	}
 
@@ -37,16 +41,22 @@ const SubThemeBox = ({ dataTitle }) => {
 		price: '65,000won',
 	}));
 
+	const clickTypeBtnHandler = () => {
+		setClickTypeBtn(dataTitle);
+		const url = `/products/?type=${dataTitle}`;
+		navigate(url);
+	};
+
 	return (
 		<>
 			<SubThemeContainer backgroundColor={backgroundColor}>
-				<SubThemeTitle>{dataTitle}</SubThemeTitle>
+				<SubThemeTitle>{dataTitle.toUpperCase()}</SubThemeTitle>
 				<SubThemeList>
 					{items.map((item) => (
 						<ProductItem key={item.id} dataTitle={dataTitle} {...item} />
 					))}
 				</SubThemeList>
-				<MoreBtn>MORE</MoreBtn>
+				<MoreBtn onClick={() => clickTypeBtnHandler(dataTitle)}>MORE</MoreBtn>
 			</SubThemeContainer>
 		</>
 	);

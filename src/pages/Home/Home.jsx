@@ -6,11 +6,11 @@ const Home = () => {
 	return (
 		<>
 			<MainSwiper />
-			<SubSwiper dataTitle="NEW ARRIVAL" />
-			<SubThemeBox dataTitle="OUTER" />
-			<SubThemeBox dataTitle="TOP" />
-			<SubThemeBox dataTitle="BOTTOM" />
-			<SubThemeBox dataTitle="ACC" />
+			<SubSwiper dataTitle="new arrival" />
+			<SubThemeBox dataTitle="outer" />
+			<SubThemeBox dataTitle="top" />
+			<SubThemeBox dataTitle="bottom" />
+			<SubThemeBox dataTitle="acc" />
 		</>
 	);
 };
