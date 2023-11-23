@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CartItem from './../../components/Cart/CartItems/CartItem';
 import CartSummary from './../../components/Cart/CartSummary/CartSummary';
 import {
@@ -10,10 +10,15 @@ import {
 	CartTitleH2,
 } from './Cart.style';
 import CartHeader from '../../components/Cart/CartHeader/CartHeader';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../components/Cart/CartUI/Button';
+import { setInitialData } from '../../slice/cartSlice';
 
 const Cart = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(setInitialData());
+	}, []);
 	const cartItem = useSelector((state) => state.cart);
 	const [checkedItemsId, setCheckedItemsId] = useState([]);
 
@@ -24,7 +29,7 @@ const Cart = () => {
 	};
 	const checkedAllItemHandler = (allChecked) => {
 		if (allChecked) {
-			const allItemsId = cartItem.map((item) => item.id);
+			const allItemsId = cartItem.map((item) => item.productId);
 			setCheckedItemsId(allItemsId);
 		} else {
 			setCheckedItemsId([]);
@@ -43,23 +48,27 @@ const Cart = () => {
 						cartItem={cartItem}
 					/>
 					<ul>
-						{cartItem.map((item, index) => (
-							<CartItem
-								key={index}
-								item={item}
-								checkedSingleItemHandler={checkedSingleItemHandler}
-								checkedItemsId={checkedItemsId}
-								cartItem={cartItem}
-							/>
-						))}
+						{cartItem &&
+							cartItem.map((item, index) => (
+								<CartItem
+									key={index}
+									item={item}
+									checkedSingleItemHandler={checkedSingleItemHandler}
+									checkedItemsId={checkedItemsId}
+									cartItem={cartItem}
+								/>
+							))}
 					</ul>
 					<CartCheckedDeleteDiv>
-						<Button size="120px" checkedItemsId={checkedItemsId}>
+						<Button
+							size="120px"
+							checkedItemsId={checkedItemsId}
+							setCheckedItemsId={setCheckedItemsId}>
 							선택 삭제
 						</Button>
 					</CartCheckedDeleteDiv>
 				</CartItemsDiv>
-				<CartSummary btnText="Checkout" />
+				<CartSummary btnText="주문하기" checkedItemsId={checkedItemsId} />
 			</CartContentsDiv>
 		</CartDiv>
 	);

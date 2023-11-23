@@ -4,17 +4,17 @@ import { CartItemCheckInput } from './CheckboxInput.style';
 
 const CheckboxInput = ({ item, checkedSingleItemHandler, checkedItemsId }) => {
 	const checkInputHandler = (e) => {
-		checkedSingleItemHandler(item.id, e.target.checked);
+		checkedSingleItemHandler(item.productId, e.target.checked);
 	};
 	return (
 		<>
 			<CartItemCheckInput
 				type="checkbox"
-				id={item.id}
+				id={item.productId}
 				onClick={checkInputHandler}
-				checked={checkedItemsId.includes(item.id) ? true : false}
+				checked={checkedItemsId.includes(item.productId) ? true : false}
 			/>
-			<label htmlFor={item.id}>
+			<label htmlFor={item.productId}>
 				<FiCheck
 					style={{
 						color: '#fff',
