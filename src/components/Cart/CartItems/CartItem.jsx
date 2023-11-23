@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CartItemDesc from './CartItemDesc/CartItemDesc';
 import {
 	ItemImgDiv,
@@ -9,9 +9,7 @@ import {
 import Button from './../CartUI/Button';
 import { useLocation } from 'react-router-dom';
 import CheckboxInput from '../CartUI/CheckboxInput';
-import { useDispatch, useSelector } from 'react-redux';
 import { CartBtn } from '../CartUI/Button.style';
-import { fetchProduct } from '../../../slice/productSlice';
 import CartItemChangingOpitons from './CartItemChangingOptions/CartItemChangingOpitons';
 
 const CartItem = ({
@@ -19,17 +17,11 @@ const CartItem = ({
 	checkedSingleItemHandler,
 	checkedItemsId,
 	cartItem,
+	products,
 }) => {
 	const location = useLocation();
-	const dispatch = useDispatch();
 	const [isClicked, setIsClicked] = useState(false);
-	const [optionChanged, setOptionChanged] = useState(false);
-
-	useEffect(() => {
-		dispatch(fetchProduct());
-		console.log('changed');
-	}, [optionChanged]); // 옵션 변경됐을 때 다시 불러올 수 있도록
-	const products = useSelector((state) => state.product);
+	const orderLocation = location.pathname.includes('order');
 
 	const optionChangeHandler = () => {
 		setIsClicked(!isClicked);
@@ -42,7 +34,7 @@ const CartItem = ({
 	return (
 		<ItemLi>
 			<ItemCheckDiv>
-				{!location.pathname.includes('order') && (
+				{!orderLocation && (
 					<CheckboxInput
 						item={item}
 						checkedSingleItemHandler={checkedSingleItemHandler}
@@ -52,7 +44,7 @@ const CartItem = ({
 				)}
 				<ItemImgDiv>
 					<img
-						src={productIdentifyItem && productIdentifyItem.thumb_nail}
+						src={productIdentifyItem && productIdentifyItem.productImg[1]}
 						alt="이미지"
 					/>
 				</ItemImgDiv>
@@ -62,15 +54,13 @@ const CartItem = ({
 					<CartItemChangingOpitons
 						cartProductIdx={item.cartProductIdx}
 						optionChangeHandler={optionChangeHandler}
-						setOptionChanged={setOptionChanged}
-						optionChanged={optionChanged}
 					/>
 				)}
 			</CartItemDesc>
 			<ItemHandleDiv>
 				<p>₩{(item.price * item.quantity).toLocaleString('ko-KR')}</p>
 				<div style={{ textAlign: 'right' }}>
-					{!isClicked && (
+					{!isClicked && !orderLocation && (
 						<CartBtn
 							style={{ marginBottom: '4px' }}
 							onClick={optionChangeHandler}>
