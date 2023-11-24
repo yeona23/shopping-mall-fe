@@ -31,7 +31,49 @@ export const HeaderNav = styled.div`
 		height: 26px;
 		cursor: pointer;
 	}
+
+	@media screen and (max-width: 1380px) {
+		width: 100%;
+		padding: 0 30px;
+	}
+	@media screen and (max-width: 750px) {
+		display: none;
+	}
 `;
+
+export const RsNav = styled.div`
+	display: none;
+	align-items: center;
+	font-size: 16px;
+	justify-content: space-between;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 30px;
+	margin: 0 auto;
+	height: 60px;
+	& > div {
+		position: absolute;
+		right: 0%;
+		top: 0%;
+		width: 70vw;
+		height: 600px;
+		background: var(--color-coconut);
+		padding: 10px 50px;
+	}
+	& > div > svg {
+		position: absolute;
+		right: 50px;
+		top: 20px;
+	}
+	& img {
+		height: 26px;
+		cursor: pointer;
+	}
+	@media screen and (max-width: 750px) {
+		display: flex;
+	}
+`;
+
 export const NavUl = styled.ul`
 	display: flex;
 	align-items: center;
@@ -44,6 +86,17 @@ export const NavUl = styled.ul`
 	& > li:first-child ul {
 		text-transform: uppercase;
 	}
+
+	@media screen and (max-width: 750px) {
+		flex-direction: column;
+		align-items: flex-start;
+		width: fit-content;
+
+		& > li:first-child:hover ul {
+			height: fit-content;
+			position: relative;
+		}
+	}
 `;
 
 export const NavLi = styled.li`
@@ -54,6 +107,14 @@ export const NavLi = styled.li`
 	}
 	&:hover ul {
 		height: 135px;
+	}
+	@media screen and (max-width: 750px) {
+		&:hover ul {
+			position: relative;
+			top: 0;
+			height: fit-content;
+			transition: none;
+		}
 	}
 `;
 
@@ -104,5 +165,11 @@ export const UserContent = styled.div`
 	}
 	& svg {
 		cursor: pointer;
+	}
+
+	@media screen and (max-width: 750px) {
+		border-bottom: 1px solid var(--color-main-text);
+		padding: 10px 0;
+		margin-bottom: 35px;
 	}
 `;

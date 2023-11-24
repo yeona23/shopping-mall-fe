@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { CategoryTitle, SubSwiperContainer } from './Swiper.style';
+import { CategoryTitle, SubItemBox, SubSwiperContainer } from './Swiper.style';
 import { MoreBtn } from '../Main/Main.style';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -15,13 +15,13 @@ const generateImgUrl = (dataTitle, index) => {
 		: `/assets/knit_${actualIndex}/knit_${actualIndex}_thumb.jpg`;
 };
 const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
-	<subItemBox>
+	<SubItemBox>
 		<div>
 			<img src={generateImgUrl(dataTitle, index)} alt=" " />
 		</div>
 		<p>{itemTitle}</p>
 		<span>{price}</span>
-	</subItemBox>
+	</SubItemBox>
 );
 
 const SubSwiper = ({ dataTitle }) => {
@@ -46,13 +46,21 @@ const SubSwiper = ({ dataTitle }) => {
 			<Swiper
 				loop={false}
 				spaceBetween={20}
-				slidesPerView={4}
-				slidesPerGroup={4}
+				slidesPerView={1}
+				// slidesPerGroup={4}
 				grabCursor={true}
 				allowTouchMove={true}
 				cssMode={false}
 				navigation={true}
 				modules={[Navigation]}
+				breakpoints={{
+					1320: {
+						slidesPerView: 4,
+					},
+					750: {
+						slidesPerView: 3,
+					},
+				}}
 				className="swiper">
 				<div className="swiper-wrapper">
 					{items.map((item) => (

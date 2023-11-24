@@ -17,7 +17,7 @@ const MainSwiper = () => {
 				slidesPerView={1}
 				slidesPerGroup={1}
 				autoplay={{ delay: 2500, disableOnInteraction: false }}
-				speed={3000}
+				speed={2500}
 				grabCursor={true}
 				allowTouchMove={true}
 				cssMode={false}

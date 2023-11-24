@@ -8,6 +8,10 @@ export const FtBox = styled.div`
 	& > div {
 		width: 1320px;
 		margin: 0 auto;
+		@media screen and (max-width: 1380px) {
+			width: 100%;
+			padding: 0 30px;
+		}
 	}
 `;
 
@@ -17,12 +21,19 @@ export const FtContainer = styled.div`
 	align-items: flex-start;
 	padding: 50px 0;
 	border-bottom: 1px solid var(--color-coconut);
+	@media screen and (max-width: 750px) {
+		flex-direction: column;
+		align-items: center;
+	}
 `;
 
 export const FooterText = styled.div`
 	display: flex;
 	gap: 60px;
 	color: var(--color-coconut);
+	@media screen and (max-width: 750px) {
+		margin-top: 50px;
+	}
 `;
 
 export const FooterUl = styled.ul`
