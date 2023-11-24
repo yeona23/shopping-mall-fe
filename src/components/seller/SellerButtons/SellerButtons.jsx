@@ -49,6 +49,8 @@ const SellerButtons = ({
 	const fetchGetProducts = async () => {
 		const response = await getProducts();
 
+		console.log(response);
+
 		setRegisteredId(response && response[response.length - 1]?.productId);
 	};
 
@@ -105,7 +107,7 @@ const SellerButtons = ({
 
 	useEffect(() => {
 		fetchGetProducts();
-	}, [registerProductHandler]);
+	}, [registerProductHandler, registerImageHandler]);
 
 	return (
 		<ButtonWrap>

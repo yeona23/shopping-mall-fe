@@ -19,6 +19,7 @@ export const SellerListItem = styled.li`
 export const ImgWrap = styled.div`
 	& img {
 		width: 160px;
+		height: 200px;
 	}
 `;
 

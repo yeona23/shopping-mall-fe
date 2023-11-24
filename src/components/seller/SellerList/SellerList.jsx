@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getUserSellProducts } from '../../../api/productApi';
+import {
+	getProducts,
+	getUserSellProducts,
+	updateDiscount,
+	updateStock,
+} from '../../../api/productApi';
 import {
 	Button,
 	ButtonsWrap,
@@ -15,10 +20,6 @@ import {
 
 const SellerList = () => {
 	const [sellerProductList, setSellerProductList] = useState([]);
-	const [inputValue, setInputValue] = useState({
-		discount: 1,
-		stock: 0,
-	});
 
 	const fetchGetSellProducts = async () => {
 		const response = await getUserSellProducts();
@@ -30,18 +31,12 @@ const SellerList = () => {
 		fetchGetSellProducts();
 	}, []);
 
-	const inputChangeHandler = (e) => {
-		const { name, value } = e.target;
-
-		setInputValue({ ...inputValue, [name]: value });
-	};
-
 	const countHandler = (type, label, productId) => {
 		setSellerProductList(
 			sellerProductList.map((product) => {
 				if (product.productId === productId) {
 					let newValue =
-						label === 'discount' ? product.discount : product.productStock;
+						label === 'discount' ? product.discount : product.stock;
 					newValue = Math.max(type === 'plus' ? newValue + 1 : newValue - 1, 0);
 					return { ...product, [label]: newValue };
 				}
@@ -56,6 +51,15 @@ const SellerList = () => {
 		);
 	};
 
+	const updateDiscountAndStock = async (productId, newDiscount, newStock) => {
+		try {
+			const discountResponse = await updateDiscount(productId, newDiscount);
+			const stockResponse = await updateStock(productId, newStock);
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
 	return (
 		<SellerListContainer>
 			<ul>
@@ -63,7 +67,7 @@ const SellerList = () => {
 					sellerProductList.map((product) => (
 						<SellerListItem key={product.productId}>
 							<ImgWrap>
-								<img src="" alt="" />
+								<img src={product?.productImg[1]} alt="" />
 							</ImgWrap>
 							<ItemInfoWrap>
 								<ItemTitle>{product.name}</ItemTitle>
@@ -79,9 +83,8 @@ const SellerList = () => {
 										</button>
 										<input
 											type="text"
-											value={inputValue.discount}
+											value={product.discount}
 											name="discount"
-											onChange={inputChangeHandler}
 										/>
 										<button
 											onClick={() =>
@@ -97,19 +100,14 @@ const SellerList = () => {
 									<div>
 										<button
 											onClick={() =>
-												countHandler('minus', 'productStock', product.productId)
+												countHandler('minus', 'stock', product.productId)
 											}>
 											-
 										</button>
-										<input
-											type="text"
-											value={product.stock}
-											name="stock"
-											onChange={inputChangeHandler}
-										/>
+										<input type="text" value={product.stock} name="stock" />
 										<button
 											onClick={() =>
-												countHandler('plus', 'productStock', product.productId)
+												countHandler('plus', 'stock', product.productId)
 											}>
 											+
 										</button>
@@ -118,13 +116,22 @@ const SellerList = () => {
 								</StockWrap>
 							</ItemInfoWrap>
 							<PriceAndButtonsWrap>
-								<div>{product.productPrice?.toLocaleString()}원</div>
+								<div>{product.price?.toLocaleString()}원</div>
 								<ButtonsWrap>
 									<Button
 										onClick={() => deleteProductHandler(product.productId)}>
 										삭제
 									</Button>
-									<Button>저장</Button>
+									<Button
+										onClick={() =>
+											updateDiscountAndStock(
+												product.productId,
+												product.discount,
+												product.stock,
+											)
+										}>
+										저장
+									</Button>
 								</ButtonsWrap>
 							</PriceAndButtonsWrap>
 						</SellerListItem>
