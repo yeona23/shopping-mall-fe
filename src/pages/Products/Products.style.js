@@ -6,6 +6,11 @@ export const ProductContainer = styled.div`
 	& > div {
 		width: 1320px;
 		margin: 0 auto;
+
+		@media screen and (max-width: 1380px) {
+			width: 100%;
+			padding: 0 30px;
+		}
 	}
 `;
 
