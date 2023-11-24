@@ -31,7 +31,7 @@ import {
 	UserWrapper,
 } from './User.style';
 import { useNavigate } from 'react-router';
-import { logoutUser } from '../../../api/authApi';
+import { logoutUser, uploadUser } from '../../../api/authApi';
 import localToken from '../../../api/LocalToken';
 
 const User = () => {
@@ -39,24 +39,32 @@ const User = () => {
 	const imgRef = useRef();
 	const navigate = useNavigate();
 
-	const saveImgFile = () => {
-		const selectedFile = imgRef.current.files[0];
-		if (!selectedFile) {
-			console.log('파일이 선택되지 않았습니다.');
-			return; // 파일이 선택되지 않은 경우 함수 종료
-		}
+	const saveImgFile = async () => {
+		try {
+			const selectedFile = imgRef.current.files[0];
+			if (!selectedFile) {
+				console.log('파일이 선택되지 않았습니다.');
+				return; // 파일이 선택되지 않은 경우 함수 종료
+			}
 
-		if (!(selectedFile instanceof Blob)) {
-			console.error('선택된 파일이 유효한 파일 또는 Blob 객체가 아닙니다.');
-			return; // 유효하지 않은 파일인 경우 함수 종료
-		}
+			if (!(selectedFile instanceof Blob)) {
+				console.error('선택된 파일이 유효한 파일 또는 Blob 객체가 아닙니다.');
+				return; // 유효하지 않은 파일인 경우 함수 종료
+			}
+			const formData = new FormData();
+			formData.append('file', selectedFile);
+			const response = await uploadUser(formData);
+			console.log(response);
+			if (!response) return;
 
-		const reader = new FileReader();
-		reader.readAsDataURL(selectedFile);
-		reader.onloadend = () => {
-			setImgFile(reader.result);
-		};
-		console.log(imgFile);
+			const reader = new FileReader();
+			reader.readAsDataURL(selectedFile);
+			reader.onloadend = () => {
+				setImgFile(reader.result);
+			};
+		} catch (error) {
+			console.error('이미지 업로드 중 오류 발생:', error.message);
+		}
 	};
 
 	const [deleteIsOpen, deleteSetIsOpen] = useState(false);
@@ -82,7 +90,8 @@ const User = () => {
 
 	const logoutHandler = async () => {
 		try {
-			await logoutUser();
+			const response = await logoutUser();
+			if (!response) return;
 			localToken.remove();
 			navigate('/');
 		} catch (error) {

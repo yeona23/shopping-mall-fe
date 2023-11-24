@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const RegisterWrapper = styled.body`
+export const RegisterWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;

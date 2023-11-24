@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import {
 	AccountDiv,
+	ButtonParagraph,
 	LoginButton,
 	LoginDiv,
 	LoginForm,
@@ -22,6 +23,7 @@ const Login = () => {
 	const onRegisterClick = () => {
 		navigate('/register');
 	};
+	const [accountIsValid, setAccountIsValid] = useState(0);
 	const [isSignInClicked, setIsSignInClicked] = useState(false);
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [passwordIsValid, setPasswordIsValid] = useState(false);
@@ -34,7 +36,7 @@ const Login = () => {
 	const inputValueHandler = (e) => {
 		const { name, value } = e.target;
 		setInputValue({ ...inputValue, [name]: value });
-
+		setAccountIsValid(0);
 		setTextIsTouched(true);
 
 		if (name === 'email') {
@@ -59,14 +61,23 @@ const Login = () => {
 		}
 	};
 
+	const inputFocusHandler = () => {
+		setEmailIsValid(true);
+		setPasswordIsValid(true);
+	};
+
 	const loginUserHandler = async (e) => {
 		e.preventDefault();
+		setIsSignInClicked(true);
 
 		if (emailIsValid && passwordIsValid) {
 			try {
 				const response = await loginUser(inputValue);
 
-				if (!response) return;
+				if (!response) {
+					setAccountIsValid(2);
+					return;
+				}
 
 				const { access_token } = response;
 
@@ -79,22 +90,21 @@ const Login = () => {
 					navigate('/');
 				}
 			} catch (error) {
-				if (error.response.code === 'ERR_NETWORK') {
-					console.log('테스트');
-				}
 				if (error.response.status === '403') {
 					console.error(error.message);
 				}
 				console.error(error.message);
 			}
 		}
-		setIsSignInClicked(true);
 	};
 
 	const nameEmailInputIsInValid =
 		!emailIsValid && textIsTouched && isSignInClicked;
 	const namePasswordInputIsInValid =
 		!passwordIsValid && textIsTouched && isSignInClicked;
+	const serverIsInValid = accountIsValid === 2 && isSignInClicked;
+	const accountIsInValid = accountIsValid === 3 && isSignInClicked;
+	const inputIsEmpty = !textIsTouched && isSignInClicked;
 
 	return (
 		<LoginWrapper>
@@ -106,19 +116,35 @@ const Login = () => {
 						placeholder="ID"
 						type="text"
 						name="email"
+						onFocus={inputFocusHandler}
 						onChange={inputValueHandler}></LoginInput>
 					{nameEmailInputIsInValid && (
-						<Paragraph>정확하지 않은 이메일입니다.</Paragraph>
+						<Paragraph>올바른 이메일 형식이 아닙니다.</Paragraph>
 					)}
 					<LoginInput
 						placeholder="PASSWORD"
 						type="password"
 						name="password"
+						onFocus={inputFocusHandler}
 						onChange={inputValueHandler}></LoginInput>
 					{namePasswordInputIsInValid && (
 						<Paragraph>비밀번호는 최소 6자리 이상이어야 합니다.</Paragraph>
 					)}
+
 					<LoginButton type="submit">SIGN IN</LoginButton>
+					{/* {accountIsInValid && (
+						<ButtonParagraph>
+							이메일 또는 비밀번호가 올바르지 않습니다.
+						</ButtonParagraph>
+					)}
+					{serverIsInValid && (
+						<ButtonParagraph>
+							현재 서버상의 문제로 로그인이 불가합니다.
+						</ButtonParagraph>
+					)} */}
+					{inputIsEmpty && (
+						<ButtonParagraph>이메일과 비밀번호를 입력해주세요.</ButtonParagraph>
+					)}
 				</LoginForm>
 				<SignUpDiv>
 					<div>Dont you have on account?</div>

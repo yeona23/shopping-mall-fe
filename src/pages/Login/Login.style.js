@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginWrapper = styled.body`
+export const LoginWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -30,7 +30,7 @@ export const LoginTitleDiv = styled.div`
 `;
 
 export const LoginInput = styled.input.attrs({
-	placeholderTextColor: '#6A6A6A',
+	placeholdertextcolor: '#6A6A6A',
 })`
 	width: 427px;
 	height: 40px;
@@ -106,4 +106,12 @@ export const Paragraph = styled.p`
 	text-align: left;
 	font-size: 12px;
 	color: tomato;
+`;
+
+export const ButtonParagraph = styled(Paragraph)`
+	width: 100%;
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
