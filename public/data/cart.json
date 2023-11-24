@@ -1,0 +1,20 @@
+[
+	{
+		"cartProductIdx": 5,
+		"cartId": 10,
+		"productId": 2,
+		"color": "blue",
+		"size": "XL",
+		"price": 850000,
+		"quantity": 1
+	},
+	{
+		"cartProductIdx": 5,
+		"cartId": 10,
+		"productId": 3,
+		"color": "brown",
+		"size": "FREE",
+		"price": 60000,
+		"quantity": 2
+	}
+]

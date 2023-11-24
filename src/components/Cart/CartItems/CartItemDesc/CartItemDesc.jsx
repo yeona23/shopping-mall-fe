@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
 	ItemDescDiv,
+	ItemInfoDiv,
 	ItemNameP,
 	ItemOptionsP,
 	ItemQuantityBtn,
@@ -8,13 +9,13 @@ import {
 	ItemQuantityInput,
 } from './CartItemDesc.style';
 import { FiMinus, FiPlus } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	MINUS_ITEM_QUANTITY,
 	PLUS_ITEM_QUANTITY,
 } from '../../../../slice/cartSlice';
 
-const CartItemDesc = ({ item }) => {
+const CartItemDesc = ({ item, children, productIdentifyItem }) => {
 	const dispatch = useDispatch();
 	const minusHandler = () => {
 		if (item.quantity === 1) return;
@@ -25,11 +26,16 @@ const CartItemDesc = ({ item }) => {
 	};
 	return (
 		<ItemDescDiv>
-			<div>
-				<ItemNameP>{item.name}</ItemNameP>
-				<ItemOptionsP>Color: {item.color}</ItemOptionsP>
-				<ItemOptionsP>Size: {item.size}</ItemOptionsP>
-			</div>
+			<ItemInfoDiv>
+				<div>
+					<ItemNameP>
+						{productIdentifyItem && productIdentifyItem.name}
+					</ItemNameP>
+					<ItemOptionsP>Color: {item.color}</ItemOptionsP>
+					<ItemOptionsP>Size: {item.size}</ItemOptionsP>
+				</div>
+				{children}
+			</ItemInfoDiv>
 			<ItemQuantityDiv>
 				<ItemQuantityBtn onClick={minusHandler}>
 					<FiMinus className="plus-minus" />

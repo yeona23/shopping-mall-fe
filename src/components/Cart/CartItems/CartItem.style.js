@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const ItemLi = styled.li`
+	position: relative;
+
 	padding: 22px 0;
 	display: grid;
 	grid-template-columns: 1fr 3fr 1fr;

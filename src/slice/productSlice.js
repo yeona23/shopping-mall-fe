@@ -1,4 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getProducts, getProductsMock } from '../api/productApi';
+
+export const fetchProduct = () => {
+	return async (dispatch) => {
+		try {
+			const data = await getProductsMock();
+			// const data = await getProducts();
+			dispatch(SET_PRODUCTS(data));
+		} catch (error) {
+			console.error('error setting initial data', error);
+		}
+	};
+};
 
 const initialState = [];
 

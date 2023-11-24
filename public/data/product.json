@@ -1,6 +1,6 @@
 [
 	{
-		"id": 1,
+		"productId": 1,
 		"name": "모던한핏 세미크롭 울자켓",
 		"price": 75800,
 		"description": "모던하면서 세련된 핏감과 골반을 덮는 세미 크롭 기장은 그대로라 바디에 예쁘게 착용되는 자켓",
@@ -27,7 +27,7 @@
 		"description_image": "/assets/jacket_1/jacket_1_description.png"
 	},
 	{
-		"id": 2,
+		"productId": 2,
 		"name": "루미나 울50% 루즈핏자켓",
 		"price": 88900,
 		"description": "고급스러운 울이 50% 혼방되어 보풀현상을 최소함은 물론, 보온성을 지켜주는 고급 자켓",
@@ -55,7 +55,7 @@
 		"description_image": "/assets/jacket_2/jacket_2_description.png"
 	},
 	{
-		"id": 3,
+		"productId": 3,
 		"name": "그릭 라운드넥 체크자켓(2size)",
 		"price": 94800,
 		"description": "넥라인 전체를 가볍게 덮어주는 노카라 라운드넥 디자인으로 심플하면서도 은근하게 포인트가 될 예쁜 자켓",
@@ -83,7 +83,7 @@
 		"description_image": "/assets/jacket_3/jacket_3_description.png"
 	},
 	{
-		"id": 4,
+		"productId": 4,
 		"name": "너컨 여유핏 부클자켓",
 		"price": 42600,
 		"description": "깔끔한 노카라 라운드 넥라인에 낙낙한 가오리 소매 디자인의 폭신폭신 도톰한 부클 원단 아우터",
@@ -111,7 +111,7 @@
 		"description_image": "/assets/jacket_4/jacket_4_description.png"
 	},
 	{
-		"id": 21,
+		"productId": 21,
 		"name": "케이트 니트 베스트 레이어드 셔츠",
 		"price": 60000,
 		"description": "기본 셔츠에 니트 베스트가 더해져 투피스를 입은 듯 보여지는 매력적인 니트",
@@ -140,7 +140,7 @@
 		"description_image": "/assets/knit_1/knit_1_description.jpg"
 	},
 	{
-		"id": 22,
+		"productId": 22,
 		"name": "팔레트 폴라넥 골지 니트",
 		"price": 49900,
 		"description": "다채로운 9가지 컬러로 일상부터 특별한 날까지 책임져줄 팔레트 폴라넥 니트",
@@ -169,7 +169,7 @@
 		"description_image": "/assets/knit_2/knit_2_description.jpg"
 	},
 	{
-		"id": 23,
+		"productId": 23,
 		"name": "엔뉴 케이블 브이넥 크롭 니트",
 		"price": 30000,
 		"description": "시간이 지나도 사랑받을 베이직한 무드와 보호본능을 자극하는 여리여리한 핏을 지녀 누구나 만족할 니트",
@@ -198,7 +198,7 @@
 		"description_image": "/assets/knit_3/knit_3_description.jpg"
 	},
 	{
-		"id": 24,
+		"productId": 24,
 		"name": "메이플 파인울 브이넥 니트",
 		"price": 49500,
 		"description": "가을 겨울 내내 활용도 높게 나온 디자인과 프리미엄 파인 울로 고급스럽게 제작된 니트",

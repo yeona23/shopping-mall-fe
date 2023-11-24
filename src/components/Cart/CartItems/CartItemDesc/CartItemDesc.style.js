@@ -6,15 +6,21 @@ export const ItemDescDiv = styled.div`
 	justify-content: space-between;
 	align-items: start;
 `;
+export const ItemInfoDiv = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+`;
 export const ItemNameP = styled.p`
-	font-size: 18px;
+	font-size: 16px;
+	font-weight: 600;
 	margin-bottom: 16px;
 `;
 export const ItemOptionsP = styled.p`
 	line-height: 26px;
 `;
 export const ItemQuantityDiv = styled.div`
-	width: 110px;
+	width: 80px;
 	border: 1px solid #434343;
 	display: flex;
 	border-radius: 5px;
@@ -25,7 +31,7 @@ export const ItemQuantityInput = styled.input`
 	width: 40%;
 	text-align: center;
 	border: none;
-	font-size: 18px;
+	font-size: 16px;
 	-webkit-appearance: textfield;
 	-moz-appearance: textfield;
 	appearance: textfield;
@@ -41,8 +47,8 @@ export const ItemQuantityBtn = styled.button`
 	border: none;
 	cursor: pointer;
 	.plus-minus {
-		width: 20px;
-		height: 20px;
+		width: 16px;
+		height: 16px;
 		vertical-align: middle;
 	}
 `;
