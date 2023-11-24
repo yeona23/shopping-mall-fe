@@ -22,7 +22,7 @@ const CartSummary = ({ children, btnText, checkedItemsId }) => {
 			{children}
 			<CartSummaryOptionDiv>
 				<p>Subtotal</p>
-				<em>₩{totalPrice}</em>
+				<em>₩{totalPrice.toLocaleString('ko-KR')}</em>
 			</CartSummaryOptionDiv>
 			<CartSummaryOptionDiv>
 				<p>Delivery cost</p>
@@ -33,8 +33,10 @@ const CartSummary = ({ children, btnText, checkedItemsId }) => {
 				<em>₩0</em>
 			</CartSummaryOptionDiv>
 			<CartSummaryOptionDiv>
-				<p>TOTAL</p>
-				<em>₩{totalPrice}</em>
+				<p style={{ fontWeight: 'bold' }}>TOTAL</p>
+				<em style={{ fontWeight: 'bold' }}>
+					₩{totalPrice.toLocaleString('ko-KR')}
+				</em>
 			</CartSummaryOptionDiv>
 			<Button size="100%" checkedItemsId={checkedItemsId}>
 				{btnText}

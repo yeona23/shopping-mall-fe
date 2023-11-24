@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CartBtn = styled.button`
-	width: ${(props) => props.size};
+	width: ${(props) => (props.size ? props.size : '120px')};
 	height: 35px;
 	border: none;
 	border-radius: 5px;
@@ -9,4 +9,5 @@ export const CartBtn = styled.button`
 	color: var(--color-coconut);
 	font-size: 16px;
 	font-family: 'Red Hat Display', sans-serif;
+	cursor: pointer;
 `;
