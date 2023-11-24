@@ -7,7 +7,12 @@ import {
 import { CartBtn } from '../../CartUI/Button.style';
 import { updateCartProduct } from '../../../../api/cartApi';
 
-const CartItemChangingOpitons = ({ optionCancelHandler, cartProductIdx }) => {
+const CartItemChangingOpitons = ({
+	optionChangeHandler,
+	cartProductIdx,
+	setOptionChanged,
+	optionChanged,
+}) => {
 	const [selectedOptions, setSelectedOptions] = useState({
 		color: '',
 		size: '',
@@ -21,7 +26,8 @@ const CartItemChangingOpitons = ({ optionCancelHandler, cartProductIdx }) => {
 	const optionSubmitHandler = (e) => {
 		e.preventDefault();
 		updateCartProduct(cartProductIdx, selectedOptions);
-		optionCancelHandler();
+		optionChangeHandler();
+		setOptionChanged(!optionChanged);
 	};
 
 	const singleOptionHandler = (e) => {
@@ -60,7 +66,7 @@ const CartItemChangingOpitons = ({ optionCancelHandler, cartProductIdx }) => {
 				<CartBtn size="48%" type="submit">
 					저장
 				</CartBtn>
-				<CartBtn size="48%" onClick={optionCancelHandler}>
+				<CartBtn size="48%" onClick={optionChangeHandler}>
 					취소
 				</CartBtn>
 			</BtnDiv>

@@ -22,16 +22,16 @@ const CartItem = ({
 }) => {
 	const location = useLocation();
 	const dispatch = useDispatch();
+	const [isClicked, setIsClicked] = useState(false);
+	const [optionChanged, setOptionChanged] = useState(false);
+
 	useEffect(() => {
 		dispatch(fetchProduct());
-	}, []); // 옵션 변경됐을 때 다시 불러올 수 있도록
+		console.log('changed');
+	}, [optionChanged]); // 옵션 변경됐을 때 다시 불러올 수 있도록
 	const products = useSelector((state) => state.product);
 
-	const [isClicked, setIsClicked] = useState(false);
 	const optionChangeHandler = () => {
-		setIsClicked(!isClicked);
-	};
-	const optionCancelHandler = () => {
 		setIsClicked(!isClicked);
 	};
 
@@ -61,7 +61,9 @@ const CartItem = ({
 				{isClicked && (
 					<CartItemChangingOpitons
 						cartProductIdx={item.cartProductIdx}
-						optionCancelHandler={optionCancelHandler}
+						optionChangeHandler={optionChangeHandler}
+						setOptionChanged={setOptionChanged}
+						optionChanged={optionChanged}
 					/>
 				)}
 			</CartItemDesc>
