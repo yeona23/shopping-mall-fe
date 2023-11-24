@@ -25,10 +25,10 @@ const ProductInfo = () => {
 	const productsData = useSelector((state) => state.product);
 
 	const productIdData = productsData.find(
-		(product) => String(product.id) === String(productId),
+		(product) => String(product.productId) === String(productId),
 	);
 
-	const PRICE = productIdData?.price;
+	const PRICE = productIdData?.originPrice;
 	const DISCOUNT = productIdData?.discount;
 	const formattedPrice = PRICE?.toLocaleString();
 	const discountPrice = Math.round((PRICE * (100 - DISCOUNT)) / 10000) * 100;

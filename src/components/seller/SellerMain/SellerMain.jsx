@@ -47,16 +47,6 @@ const SellerMain = ({ onSubmit, onReset, isRegisterImage }) => {
 				/>
 				<span>원</span>
 			</div>
-			{/* <div>
-				<label htmlFor="discount">할인율</label>
-				<input
-					type="text"
-					id="discount"
-					name="discount"
-					onChange={inputChangeHandler}
-				/>
-				<span>%</span>
-			</div> */}
 			<div>
 				<label htmlFor="stock">재고</label>
 				<input

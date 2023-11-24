@@ -9,7 +9,7 @@ const ProductDetailDescription = () => {
 	const productsData = useSelector((state) => state.product);
 
 	const productIdData = productsData.find(
-		(product) => String(product.id) === String(productId),
+		(product) => String(product.productId) === String(productId),
 	);
 
 	return (
@@ -18,7 +18,7 @@ const ProductDetailDescription = () => {
 			<ul>
 				{productIdData && (
 					<ImgWrap>
-						<img src={productIdData?.description_image} />
+						<img src={productIdData?.productImg[0]} />
 					</ImgWrap>
 				)}
 			</ul>

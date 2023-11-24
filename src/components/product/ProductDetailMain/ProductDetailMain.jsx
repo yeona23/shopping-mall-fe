@@ -22,9 +22,15 @@ const ProductDetailMain = () => {
 
 	const productsData = useSelector((state) => state.product);
 
+	console.log(productsData);
+
 	const productIdData = productsData.find(
-		(product) => String(product.id) === String(productId),
+		(product) => String(product.productId) === String(productId),
 	);
+
+	const detailImages = productIdData
+		? productIdData?.productImg.filter((_, index) => index !== 0 && index !== 1)
+		: [];
 
 	const handleBottomSwiperSlideClick = (index) => {
 		if (topSwiperRef.current && bottomSwiperRef.current) {
@@ -46,8 +52,8 @@ const ProductDetailMain = () => {
 					modules={[Navigation, Mousewheel]}
 					mousewheel={{ forceToAxis: true }}
 					className="main-img-swiper">
-					{productIdData &&
-						productIdData.detail_image.map((image, index) => (
+					{detailImages &&
+						detailImages.map((image, index) => (
 							<SwiperSlide key={index}>
 								<ImgWrap>
 									<img src={image} />
@@ -70,8 +76,8 @@ const ProductDetailMain = () => {
 							modules={[Navigation, Mousewheel]}
 							mousewheel={{ forceToAxis: true }}
 							className="sub-img-swiper">
-							{productIdData &&
-								productIdData.detail_image.map((image, index) => (
+							{detailImages &&
+								detailImages.map((image, index) => (
 									<SwiperSlide
 										key={index}
 										className="sub-img-slide"
