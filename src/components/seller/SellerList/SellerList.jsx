@@ -66,7 +66,7 @@ const SellerList = () => {
 								<img src="" alt="" />
 							</ImgWrap>
 							<ItemInfoWrap>
-								<ItemTitle>{product.productName}</ItemTitle>
+								<ItemTitle>{product.name}</ItemTitle>
 								<div>카테고리 : {product.category}</div>
 								<DiscountWrap>
 									<label htmlFor="discount">할인율</label>
@@ -103,7 +103,7 @@ const SellerList = () => {
 										</button>
 										<input
 											type="text"
-											value={product.productStock}
+											value={product.stock}
 											name="stock"
 											onChange={inputChangeHandler}
 										/>

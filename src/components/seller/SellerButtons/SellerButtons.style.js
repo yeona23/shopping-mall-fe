@@ -8,24 +8,23 @@ export const ButtonWrap = styled.div`
 	margin: 20px 0;
 	margin-right: 130px;
 
-	& :nth-child(1) {
-		background-color: var(--color-coconut);
-		color: var(--color-palmoil);
-		margin-right: 30px;
-	}
-
-	& :nth-child(2) {
-		background-color: var(--color-palmoil);
-		color: var(--color-coconut);
-	}
-
 	& button {
 		border: none;
 		outline: none;
-		background-color: transparent;
 		padding: 14px;
 		font-size: 20px;
 		width: 200px;
 		cursor: pointer;
 	}
+`;
+
+export const CoconutButton = styled.button`
+	background-color: var(--color-coconut);
+	color: var(--color-palmoil);
+	margin-right: 30px;
+`;
+
+export const PalmoilButton = styled.button`
+	background-color: var(--color-palmoil);
+	color: var(--color-coconut);
 `;

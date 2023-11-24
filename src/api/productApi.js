@@ -3,6 +3,7 @@ import ApiClient from './ApiClient';
 const REGISTER = '/register';
 const GET_ALL = '/getAll';
 const USER_SELL = '/userSell';
+const IMAGE_UPLOAD = '/imgUpload';
 const BASE_URL = 'http://3.34.122.57:8080';
 
 const productMockApi = new ApiClient('/data');
@@ -23,14 +24,16 @@ export const getUserSellProducts = async () => {
 
 export const registerProduct = async (body) => {
 	return await productApi.post(REGISTER, {
-		productName: body.name,
-		productPrice: Number(body.price),
-		productInfo: body.description,
-		productStock: Number(body.stock),
-		productSell: 0,
-		productEnroll: body.enroll,
-		productImg: '이미지',
+		name: body.name,
+		price: Number(body.price),
+		description: body.description,
+		stock: Number(body.stock),
+		enroll: body.enroll,
 		category: body.main_category,
 		subCategory: body.sub_category,
 	});
+};
+
+export const registerImage = async (productId, body) => {
+	return await productApi.post(IMAGE_UPLOAD + `?id=${productId}`, body);
 };

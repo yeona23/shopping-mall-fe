@@ -1,14 +1,27 @@
 import { useDispatch } from 'react-redux';
-import { registerProduct } from '../../../api/productApi';
-import { ButtonWrap } from './SellerButtons.style';
+import {
+	getProducts,
+	registerImage,
+	registerProduct,
+} from '../../../api/productApi';
+import {
+	ButtonWrap,
+	CoconutButton,
+	PalmoilButton,
+} from './SellerButtons.style';
 import { SET_SELL_PRODUCT } from '../../../slice/productSlice';
+import { useEffect, useState } from 'react';
 
 const SellerButtons = ({
 	isRegisterPage,
 	setIsRegisterPage,
+	isRegisterImage,
+	setIsRegisterImage,
 	inputData,
 	onResetInputFields,
 }) => {
+	const [registeredId, setRegisteredId] = useState(0);
+
 	const lookupListHandler = () => {
 		setIsRegisterPage(false);
 	};
@@ -17,11 +30,10 @@ const SellerButtons = ({
 
 	const fetchRegisterProduct = async () => {
 		try {
-			if (Object.keys(inputData).length > 7) {
+			if (Object.keys(inputData).length > 6) {
 				const response = await registerProduct(inputData);
 
 				if (response) {
-					setIsRegisterPage(false);
 					onResetInputFields();
 				}
 			} else {
@@ -34,16 +46,35 @@ const SellerButtons = ({
 		}
 	};
 
+	const fetchGetProducts = async () => {
+		const response = await getProducts();
+
+		setRegisteredId(response && response[response.length - 1]?.productId);
+	};
+
+	const fetchRegisterImage = async (files) => {
+		const formData = new FormData();
+
+		for (let i = 0; i < files.length; i++) {
+			formData.append('files', files[i]);
+		}
+
+		try {
+			const response = await registerImage(registeredId, formData);
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
 	const registerProductHandler = () => {
 		try {
-			if (!isRegisterPage) {
-				if (Object.keys(inputData).length <= 7) {
-					setIsRegisterPage(true);
+			if (isRegisterPage) {
+				if (Object.keys(inputData).length > 6) {
+					onResetInputFields();
+					setIsRegisterImage(true);
 				}
 			} else {
-				if (Object.keys(inputData).length > 7) {
-					onResetInputFields();
-				}
+				setIsRegisterPage(true);
 			}
 
 			fetchRegisterProduct();
@@ -55,10 +86,38 @@ const SellerButtons = ({
 		}
 	};
 
+	const registerImageHandler = () => {
+		try {
+			if (!isRegisterPage) {
+				if (Object.keys(inputData).length <= 7) {
+					setIsRegisterPage(true);
+				}
+			}
+
+			fetchRegisterImage(inputData.productImg);
+
+			setIsRegisterImage(false);
+			setIsRegisterPage(false);
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
+	useEffect(() => {
+		fetchGetProducts();
+	}, [registerProductHandler]);
+
 	return (
 		<ButtonWrap>
-			<button onClick={registerProductHandler}>판매 등록하기</button>
-			<button onClick={lookupListHandler}>리스트 조회하기</button>
+			<CoconutButton onClick={registerProductHandler}>
+				텍스트 정보 등록
+			</CoconutButton>
+			{isRegisterImage && (
+				<CoconutButton onClick={registerImageHandler}>
+					이미지 정보 등록
+				</CoconutButton>
+			)}
+			<PalmoilButton onClick={lookupListHandler}>리스트 조회</PalmoilButton>
 		</ButtonWrap>
 	);
 };

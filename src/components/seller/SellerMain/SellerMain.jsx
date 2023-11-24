@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
 import { SellerMainContainer } from './SellerMain.style';
 
-const SellerMain = ({ onSubmit, onReset }) => {
+const SellerMain = ({ onSubmit, onReset, isRegisterImage }) => {
 	const [inputValue, setInputValue] = useState({});
-
-	const inputImageHandler = (e) => {
-		const { name, files } = e.target;
-		setInputValue({ ...inputValue, [name]: files[0] });
-	};
 
 	const inputDetailImageHandler = (e) => {
 		const { name, files } = e.target;
+
 		setInputValue({ ...inputValue, [name]: files });
 	};
+
+	console.log(inputValue);
 
 	const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
@@ -49,7 +47,7 @@ const SellerMain = ({ onSubmit, onReset }) => {
 				/>
 				<span>원</span>
 			</div>
-			<div>
+			{/* <div>
 				<label htmlFor="discount">할인율</label>
 				<input
 					type="text"
@@ -58,7 +56,7 @@ const SellerMain = ({ onSubmit, onReset }) => {
 					onChange={inputChangeHandler}
 				/>
 				<span>%</span>
-			</div>
+			</div> */}
 			<div>
 				<label htmlFor="stock">재고</label>
 				<input
@@ -105,34 +103,6 @@ const SellerMain = ({ onSubmit, onReset }) => {
 				</select>
 			</div>
 			<div>
-				<label htmlFor="thumb_nail">썸네일 이미지</label>
-				<input
-					type="file"
-					id="thumb_nail"
-					name="thumb_nail"
-					onChange={inputImageHandler}
-				/>
-			</div>
-			<div>
-				<label htmlFor="detail_image">상세 이미지</label>
-				<input
-					type="file"
-					id="detail_image"
-					name="detail_image"
-					multiple
-					onChange={inputDetailImageHandler}
-				/>
-			</div>
-			<div>
-				<label htmlFor="description_image">설명 이미지</label>
-				<input
-					type="file"
-					id="description_image"
-					name="description_image"
-					onChange={inputImageHandler}
-				/>
-			</div>
-			<div>
 				<label htmlFor="description">상세 설명</label>
 				<input
 					type="text"
@@ -150,6 +120,18 @@ const SellerMain = ({ onSubmit, onReset }) => {
 					onChange={inputChangeHandler}
 				/>
 			</div>
+			{isRegisterImage && (
+				<div>
+					<label htmlFor="productImg">이미지 등록</label>
+					<input
+						type="file"
+						id="productImg"
+						name="productImg"
+						onChange={inputDetailImageHandler}
+						multiple
+					/>
+				</div>
+			)}
 		</SellerMainContainer>
 	);
 };

@@ -7,6 +7,7 @@ import { SellerSection } from './Seller.style';
 
 const Seller = () => {
 	const [isRegisterPage, setIsRegisterPage] = useState(true);
+	const [isRegisterImage, setIsRegisterImage] = useState(false);
 	const [inputValue, setInputValue] = useState({});
 	const [resetInputFields, setResetInputFields] = useState(() => () => {});
 
@@ -25,12 +26,15 @@ const Seller = () => {
 				<SellerMain
 					onSubmit={handleProductSubmit}
 					onReset={handleResetInputFields}
+					isRegisterImage={isRegisterImage}
 				/>
 			)}
 			{!isRegisterPage && <SellerList />}
 			<SellerButtons
 				isRegisterPage={isRegisterPage}
 				setIsRegisterPage={setIsRegisterPage}
+				isRegisterImage={isRegisterImage}
+				setIsRegisterImage={setIsRegisterImage}
 				inputData={inputValue}
 				onResetInputFields={resetInputFields}
 			/>
