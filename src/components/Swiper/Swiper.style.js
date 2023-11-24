@@ -13,10 +13,18 @@ export const MainSwiperContainer = styled.div`
 
 	.swiper-slide {
 		width: 100%;
+		@media screen and (max-width: 1260px) {
+			display: flex;
+			justify-content: flex-end;
+		}
 	}
 
 	.swiper-slide img {
 		width: 100%;
+		@media screen and (max-width: 1260px) {
+			width: auto;
+			height: 100%;
+		}
 	}
 
 	.swiper-button-prev,
@@ -28,20 +36,25 @@ export const MainSwiperContainer = styled.div`
 
 export const SubSwiperContainer = styled.div`
 	width: 100%;
-	height: 110vh;
+	height: 1000px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	background-color: ${(props) => props.backgroundColor || 'inherit'};
 
+	@media screen and (max-width: 750px) {
+		margin-top: 100px;
+	}
+
 	.swiper {
 		width: 1320px;
 		margin-bottom: 60px;
-	}
-
-	.swiper-wrapper {
-		width: inherit;
+		overflow: hidden;
+		@media screen and (max-width: 1380px) {
+			width: 100%;
+			padding: 0 30px;
+		}
 	}
 
 	.swiper-slide {
@@ -103,6 +116,6 @@ export const ProductSwiperContainer = styled.div`
 	}
 `;
 
-export const subItemBox = styled.div`
+export const SubItemBox = styled.div`
 	width: 100%;
 `;

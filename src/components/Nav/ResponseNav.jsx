@@ -1,51 +1,54 @@
 import React, { useState } from 'react';
-import {
-	DropLi,
-	Dropdown,
-	Header,
-	HeaderNav,
-	NavLi,
-	NavUl,
-	UserContent,
-} from './Nav.style';
-import { BsCart4 } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { NavLi, NavUl, RsNav, UserContent } from './Nav.style';
 import NavDropdown from './NavDropdown';
-import ResponseNav from './ResponseNav';
+import { useNavigate } from 'react-router-dom';
+import { BsCart4 } from 'react-icons/bs';
+import { RxCross1, RxHamburgerMenu } from 'react-icons/rx';
 
-const Nav = () => {
+const ResponseNav = () => {
 	const navigate = useNavigate();
 	const [selectedLi, setSelectedLi] = useState(null);
-
-	const onHomeClick = () => {
-		navigate('/');
-	};
+	const [isDropdownVisible, setDropdownVisible] = useState(false);
 
 	const clickNavHandler = (type) => {
 		setSelectedLi(type);
 		const url = `/products/?type=${type}`;
 		navigate(url);
+		setDropdownVisible(false);
+	};
+
+	const onHomeClick = () => {
+		navigate('/');
+		setDropdownVisible(false);
 	};
 
 	const onItemClick = (type, subType) => {
 		setSelectedLi(type);
 		const url = `/products/?type=${type}&subType=${subType}`;
 		navigate(url);
+		setDropdownVisible(false);
 	};
 
 	const onSignInClick = () => {
 		navigate('/login');
+		setDropdownVisible(false);
+	};
+
+	const toggleDropdown = () => {
+		setDropdownVisible(!isDropdownVisible);
 	};
 
 	return (
-		<Header>
-			<HeaderNav>
+		<RsNav>
+			<img src="/assets/main-logo.svg" alt="mainLogo" onClick={onHomeClick} />
+			<RxHamburgerMenu size={25} onClick={toggleDropdown} />
+			{isDropdownVisible && (
 				<div>
-					<img
-						src="/assets/main-logo.svg"
-						alt="mainLogo"
-						onClick={onHomeClick}
-					/>
+					<RxCross1 size={20} onClick={toggleDropdown} />
+					<UserContent>
+						<span onClick={onSignInClick}>SIGN IN</span>
+						<BsCart4 color="var(--color-main-text)" size={20} />
+					</UserContent>
 					<NavUl>
 						<NavLi onClick={() => clickNavHandler('new')}>
 							NEW
@@ -83,20 +86,15 @@ const Nav = () => {
 							ACC
 							<NavDropdown
 								type="acc"
-								subTypes={['shoes', 'bag', 'etc']}
+								subTypes={['shoes', 'socks', 'etc']}
 								onItemClick={onItemClick}
 							/>
 						</NavLi>
 					</NavUl>
 				</div>
-				<UserContent>
-					<span onClick={onSignInClick}>SIGN IN</span>
-					<BsCart4 color="var(--color-main-text)" size={20} />
-				</UserContent>
-			</HeaderNav>
-			<ResponseNav />
-		</Header>
+			)}
+		</RsNav>
 	);
 };
 
-export default Nav;
+export default ResponseNav;

@@ -8,6 +8,21 @@ export const SubThemeContainer = styled.div`
 	flex-direction: column;
 	margin: 0 auto;
 	background-color: ${(props) => props.backgroundColor || 'inherit'};
+
+	@media screen and (max-width: 1380px) {
+		height: auto;
+		aspect-ratio: 1 / 1.5;
+		margin-top: 30px;
+	}
+	@media screen and (max-width: 960px) {
+		height: auto;
+		aspect-ratio: 1 /3;
+		margin-top: 0px;
+	}
+
+	@media screen and (max-width: 720px) {
+		margin-bottom: 100px;
+	}
 `;
 
 export const SubThemeList = styled.div`
@@ -16,6 +31,10 @@ export const SubThemeList = styled.div`
 	flex-wrap: wrap;
 	gap: 20px;
 	margin: 0 auto;
+	@media screen and (max-width: 1380px) {
+		width: 100%;
+		padding: 0 30px;
+	}
 `;
 
 export const SubThemeTitle = styled.h2`

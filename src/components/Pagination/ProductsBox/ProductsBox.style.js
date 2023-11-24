@@ -38,4 +38,11 @@ export const ItemBox = styled.div`
 	& p {
 		margin: 10px 0;
 	}
+
+	@media screen and (max-width: 1380px) {
+		width: calc((100% - 40px) / 3);
+	}
+	@media screen and (max-width: 960px) {
+		width: calc((100% - 20px) / 2);
+	}
 `;
