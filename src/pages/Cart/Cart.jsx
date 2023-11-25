@@ -13,14 +13,25 @@ import CartHeader from '../../components/Cart/CartHeader/CartHeader';
 import { useEffect, useState } from 'react';
 import Button from '../../components/Cart/CartUI/Button';
 import { setInitialData } from '../../slice/cartSlice';
+import { getProducts } from '../../api/productApi';
+import { SET_PRODUCTS } from '../../slice/productSlice';
 
 const Cart = () => {
 	const dispatch = useDispatch();
+	const [checkedItemsId, setCheckedItemsId] = useState([]);
+
+	const fetchProduct = async () => {
+		const response = await getProducts();
+
+		dispatch(SET_PRODUCTS(response));
+	};
+
 	useEffect(() => {
 		dispatch(setInitialData());
-	}, []);
+		fetchProduct();
+	}, []); // 옵션 변경됐을 때 다시 불러올 수 있도록
 	const cartItem = useSelector((state) => state.cart);
-	const [checkedItemsId, setCheckedItemsId] = useState([]);
+	const products = useSelector((state) => state.product);
 
 	const checkedSingleItemHandler = (id, checked) => {
 		if (checked) {
@@ -56,6 +67,7 @@ const Cart = () => {
 									checkedSingleItemHandler={checkedSingleItemHandler}
 									checkedItemsId={checkedItemsId}
 									cartItem={cartItem}
+									products={products}
 								/>
 							))}
 					</ul>
@@ -68,7 +80,11 @@ const Cart = () => {
 						</Button>
 					</CartCheckedDeleteDiv>
 				</CartItemsDiv>
-				<CartSummary btnText="주문하기" checkedItemsId={checkedItemsId} />
+				<CartSummary
+					btnText="주문하기"
+					checkedItemsId={checkedItemsId}
+					products={products}
+				/>
 			</CartContentsDiv>
 		</CartDiv>
 	);
