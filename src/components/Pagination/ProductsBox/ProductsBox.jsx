@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { ItemBox, ProductList } from './ProductsBox.style';
 import PageButton from '../PageButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_PRODUCTS, fetchProduct } from '../../../slice/productSlice';
+import { SET_PRODUCTS } from '../../../slice/productSlice';
 import { getProducts } from '../../../api/productApi';
+import { useNavigate } from 'react-router-dom';
 
-const ProductItem = ({ price, itemTitle, thumbnail }) => (
-	<ItemBox>
+const ProductItem = ({ price, itemTitle, thumbnail, onClick }) => (
+	<ItemBox onClick={onClick}>
 		<div>
 			<img src={thumbnail} alt={itemTitle} />
 		</div>
@@ -17,6 +18,7 @@ const ProductItem = ({ price, itemTitle, thumbnail }) => (
 
 const ProductsBox = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const fetchProductsData = async () => {
 		const response = await getProducts();
@@ -29,6 +31,11 @@ const ProductsBox = () => {
 
 	const products = useSelector((state) => state.product);
 
+	const clickProductItem = (product_id) => {
+		const url = `/product/${product_id}`;
+		navigate(url);
+	};
+
 	return (
 		<>
 			<ProductList>
@@ -39,6 +46,7 @@ const ProductsBox = () => {
 						index={product.index}
 						itemTitle={product.name}
 						price={product.price}
+						onClick={() => clickProductItem(product.productId)}
 					/>
 				))}
 			</ProductList>
