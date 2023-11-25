@@ -18,7 +18,7 @@ const PaginationBar = () => {
 				) : (
 					<BsPlus size={22} color="var(--color-main-text)" />
 				)}
-				<FDropdown isOpen={isDropdownVisible} />
+				<FDropdown isOpened={isDropdownVisible} />
 			</div>
 		</PaginationBox>
 	);

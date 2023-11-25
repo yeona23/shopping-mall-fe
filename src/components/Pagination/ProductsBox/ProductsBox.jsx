@@ -1,37 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ItemBox, ProductList } from './ProductsBox.style';
 import PageButton from '../PageButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_PRODUCTS, fetchProduct } from '../../../slice/productSlice';
+import { getProducts } from '../../../api/productApi';
 
-const generateImgUrl = (dataTitle, index) => {
-	const maxIndex = 4;
-	const actualIndex = index <= maxIndex ? index : (index % maxIndex) + 1;
-	return dataTitle === 'OUTER'
-		? `/assets/jacket_${actualIndex}/jacket_${actualIndex}_thumb.jpg`
-		: `/assets/knit_${actualIndex}/knit_${actualIndex}_thumb.jpg`;
-};
-
-const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
+const ProductItem = ({ price, itemTitle, thumbnail }) => (
 	<ItemBox>
 		<div>
-			<img src={generateImgUrl(dataTitle, index)} alt=" " />
+			<img src={thumbnail} alt={itemTitle} />
 		</div>
 		<p>{itemTitle}</p>
 		<span>{price}</span>
 	</ItemBox>
 );
 
-const ProductsBox = ({ dataTitle }) => {
-	const items = Array.from({ length: 16 }, (_, index) => ({
-		id: index + 1,
-		index: index + 1,
-		itemTitle: 'gvbhdfgwysfuygsf',
-		price: '65,000won',
-	}));
+const ProductsBox = () => {
+	const dispatch = useDispatch();
+
+	const fetchProductsData = async () => {
+		const response = await getProducts();
+		dispatch(SET_PRODUCTS(response));
+	};
+
+	useEffect(() => {
+		fetchProductsData();
+	}, []);
+
+	const products = useSelector((state) => state.product);
+
 	return (
 		<>
 			<ProductList>
-				{items.map((item) => (
-					<ProductItem key={item.id} dataTitle={dataTitle} {...item} />
+				{products.map((product) => (
+					<ProductItem
+						key={product.productId}
+						thumbnail={product.productImg[1]}
+						index={product.index}
+						itemTitle={product.name}
+						price={product.price}
+					/>
 				))}
 			</ProductList>
 			<PageButton />

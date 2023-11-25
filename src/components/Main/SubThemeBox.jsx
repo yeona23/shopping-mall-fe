@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ItemBox } from '../Pagination/ProductsBox/ProductsBox.style';
 import {
 	MoreBtn,
@@ -7,18 +7,14 @@ import {
 	SubThemeTitle,
 } from './Main.style';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_PRODUCTS } from '../../slice/productSlice';
+import { getProducts } from '../../api/productApi';
 
-const generateImgUrl = (dataTitle, index) => {
-	const maxIndex = 4;
-	const actualIndex = index <= maxIndex ? index : (index % maxIndex) + 1;
-	return dataTitle === 'OUTER'
-		? `/assets/jacket_${actualIndex}/jacket_${actualIndex}_thumb.jpg`
-		: `/assets/knit_${actualIndex}/knit_${actualIndex}_thumb.jpg`;
-};
-const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
-	<ItemBox>
+const ProductItem = ({ price, itemTitle, thumbnail, onClick }) => (
+	<ItemBox onClick={onClick}>
 		<div>
-			<img src={generateImgUrl(dataTitle, index)} alt=" " />
+			<img src={thumbnail} alt={itemTitle} />
 		</div>
 		<p>{itemTitle}</p>
 		<span>{price}</span>
@@ -27,23 +23,33 @@ const ProductItem = ({ dataTitle, index, price, itemTitle }) => (
 
 const SubThemeBox = ({ dataTitle }) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [clickTypeBtn, setClickTypeBtn] = useState();
+
+	const fetchProductsData = async () => {
+		const response = await getProducts();
+		dispatch(SET_PRODUCTS(response));
+	};
+
+	useEffect(() => {
+		fetchProductsData();
+	}, []);
+
+	const products = useSelector((state) => state.product.slice(0, 8));
 
 	let backgroundColor = '';
 	if (dataTitle === 'outer' || dataTitle === 'bottom') {
 		backgroundColor = 'var(--color-coconut)';
 	}
 
-	const items = Array.from({ length: 8 }, (_, index) => ({
-		id: index + 1,
-		index: index + 1,
-		itemTitle: 'gvbhdfgwysfuygsf',
-		price: '65,000won',
-	}));
-
 	const clickTypeBtnHandler = () => {
 		setClickTypeBtn(dataTitle);
 		const url = `/products/?type=${dataTitle}`;
+		navigate(url);
+	};
+
+	const clickProductItem = (product_id) => {
+		const url = `/product/${product_id}`;
 		navigate(url);
 	};
 
@@ -52,8 +58,14 @@ const SubThemeBox = ({ dataTitle }) => {
 			<SubThemeContainer backgroundColor={backgroundColor}>
 				<SubThemeTitle>{dataTitle.toUpperCase()}</SubThemeTitle>
 				<SubThemeList>
-					{items.map((item) => (
-						<ProductItem key={item.id} dataTitle={dataTitle} {...item} />
+					{products.map((product) => (
+						<ProductItem
+							key={product.productId}
+							thumbnail={product.productImg[1]}
+							itemTitle={product.name}
+							price={product.price}
+							onClick={() => clickProductItem(product.productId)}
+						/>
 					))}
 				</SubThemeList>
 				<MoreBtn onClick={() => clickTypeBtnHandler(dataTitle)}>MORE</MoreBtn>

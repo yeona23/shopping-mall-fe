@@ -4,9 +4,9 @@ import FTCategory from './FTCategory';
 import SortBox from './SortBox';
 import FTPrice from './FTPrice';
 
-const FDropdown = ({ isOpen }) => {
+const FDropdown = ({ isOpened }) => {
 	return (
-		<FTDropdown isOpen={isOpen}>
+		<FTDropdown isOpen={isOpened}>
 			<FTCategory />
 			<FTPrice />
 			<SortBox />
