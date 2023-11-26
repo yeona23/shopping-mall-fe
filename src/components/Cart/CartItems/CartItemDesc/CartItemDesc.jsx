@@ -16,40 +16,15 @@ import {
 } from '../../../../slice/cartSlice';
 
 const CartItemDesc = ({ item, children, productIdentifyItem }) => {
-	const dispatch = useDispatch();
-	const minusHandler = () => {
-		if (item.quantity === 1) return;
-		dispatch(MINUS_ITEM_QUANTITY(item));
-	};
-	const plusHandler = () => {
-		dispatch(PLUS_ITEM_QUANTITY(item));
-	};
 	return (
 		<ItemDescDiv>
-			<ItemInfoDiv>
-				<div>
-					<ItemNameP>
-						{productIdentifyItem && productIdentifyItem.name}
-					</ItemNameP>
-					<ItemOptionsP>Color: {item.color}</ItemOptionsP>
-					<ItemOptionsP>Size: {item.size}</ItemOptionsP>
-				</div>
-				{children}
-			</ItemInfoDiv>
-			<ItemQuantityDiv>
-				<ItemQuantityBtn onClick={minusHandler}>
-					<FiMinus className="plus-minus" />
-				</ItemQuantityBtn>
-				<ItemQuantityInput
-					type="number"
-					value={item.quantity}
-					min={1}
-					max={100}
-				/>
-				<ItemQuantityBtn onClick={plusHandler}>
-					<FiPlus className="plus-minus" />
-				</ItemQuantityBtn>
-			</ItemQuantityDiv>
+			<div>
+				<ItemNameP>{productIdentifyItem && productIdentifyItem.name}</ItemNameP>
+				<ItemOptionsP>색상: {item.color}</ItemOptionsP>
+				<ItemOptionsP>사이즈: {item.size}</ItemOptionsP>
+				<ItemOptionsP>수량: {item.quantity}</ItemOptionsP>
+			</div>
+			{children}
 		</ItemDescDiv>
 	);
 };
