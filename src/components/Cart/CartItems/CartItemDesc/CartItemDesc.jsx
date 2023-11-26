@@ -1,19 +1,5 @@
-import React, { useState } from 'react';
-import {
-	ItemDescDiv,
-	ItemInfoDiv,
-	ItemNameP,
-	ItemOptionsP,
-	ItemQuantityBtn,
-	ItemQuantityDiv,
-	ItemQuantityInput,
-} from './CartItemDesc.style';
-import { FiMinus, FiPlus } from 'react-icons/fi';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-	MINUS_ITEM_QUANTITY,
-	PLUS_ITEM_QUANTITY,
-} from '../../../../slice/cartSlice';
+import React from 'react';
+import { ItemDescDiv, ItemNameP, ItemOptionsP } from './CartItemDesc.style';
 
 const CartItemDesc = ({ item, children, productIdentifyItem }) => {
 	return (

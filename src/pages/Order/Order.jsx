@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	CartContentsDiv,
 	CartDiv,
@@ -9,11 +9,26 @@ import {
 import CartSummary from '../../components/Cart/CartSummary/CartSummary';
 import CartItem from '../../components/Cart/CartItems/CartItem';
 import OrderInfo from '../../components/Cart/Order/OrderInfo';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../api/productApi';
+import { SET_PRODUCTS } from '../../slice/productSlice';
+import { setInitialData } from '../../slice/cartSlice';
 
 const Order = () => {
-	const cartItem = useSelector((state) => state.cart);
+	const dispatch = useDispatch();
+	const fetchProduct = async () => {
+		const response = await getProducts();
 
+		dispatch(SET_PRODUCTS(response));
+	};
+
+	useEffect(() => {
+		dispatch(setInitialData());
+		fetchProduct();
+	}, [dispatch]);
+
+	const cartItem = useSelector((state) => state.cart);
+	const products = useSelector((state) => state.product);
 	return (
 		<CartDiv>
 			<CartTitleDiv>
@@ -23,11 +38,12 @@ const Order = () => {
 				<CartItemsDiv>
 					<OrderInfo />
 				</CartItemsDiv>
-				<CartSummary btnText="Pay Now">
+				<CartSummary btnText="Pay Now" products={products}>
 					<ul>
-						{cartItem.map((item, index) => (
-							<CartItem key={index} item={item} />
-						))}
+						{cartItem &&
+							cartItem.map((item, index) => (
+								<CartItem key={index} item={item} products={products} />
+							))}
 					</ul>
 				</CartSummary>
 			</CartContentsDiv>

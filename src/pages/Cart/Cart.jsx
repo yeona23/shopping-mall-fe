@@ -10,7 +10,7 @@ import {
 	CartTitleH2,
 } from './Cart.style';
 import CartHeader from '../../components/Cart/CartHeader/CartHeader';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Button from '../../components/Cart/CartUI/Button';
 import { setInitialData } from '../../slice/cartSlice';
 import { getProducts } from '../../api/productApi';
@@ -28,8 +28,14 @@ const Cart = () => {
 
 	useEffect(() => {
 		dispatch(setInitialData());
+
+		console.log('changed');
+	}, [dispatch]); // 옵션 변경됐을 때 다시 불러올 수 있도록(put할때 ?)
+
+	useEffect(() => {
 		fetchProduct();
-	}, []); // 옵션 변경됐을 때 다시 불러올 수 있도록
+	}, []);
+
 	const cartItem = useSelector((state) => state.cart);
 	const products = useSelector((state) => state.product);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FiCheck } from 'react-icons/fi';
 import { CartItemCheckInput } from './CheckboxInput.style';
 
