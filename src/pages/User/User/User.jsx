@@ -176,6 +176,10 @@ const User = () => {
 		}
 	};
 
+	const onRegistrationClick = () => {
+		navigate('/seller');
+	};
+
 	return (
 		<UserWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
@@ -283,7 +287,9 @@ const User = () => {
 						<OnlySellerDiv>
 							<div>ONLY SELLER</div>
 						</OnlySellerDiv>
-						<ProductRegisterButton>PRODUCT REGISTRATION</ProductRegisterButton>
+						<ProductRegisterButton onClick={onRegistrationClick}>
+							PRODUCT REGISTRATION
+						</ProductRegisterButton>
 					</UserItemDivRight>
 				</UserContent>
 				<UserContent>
