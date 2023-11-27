@@ -15,6 +15,7 @@ import {
 } from './Register.style';
 import { registerUser } from '../../../api/authApi';
 import { useNavigate } from 'react-router-dom';
+import { myPagePut } from '../../../api/myPageApi';
 
 const Register = () => {
 	const navigate = useNavigate();

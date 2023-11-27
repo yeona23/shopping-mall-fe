@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AddressChangeModal from '../AddressChangeModal/AddressChangeModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import TelChangeModal from '../TelChangeModal/TelChangeModal';
@@ -33,11 +33,62 @@ import {
 import { useNavigate } from 'react-router';
 import { logoutUser, uploadUser } from '../../../api/authApi';
 import localToken from '../../../api/LocalToken';
+import { myPageGet, myPagePut } from '../../../api/myPageApi';
+import MyInfoModal from '../MyInfoModal/MyInfoModal';
 
 const User = () => {
 	const [imgFile, setImgFile] = useState('');
 	const imgRef = useRef();
 	const navigate = useNavigate();
+
+	const [userInfo, setUserInfo] = useState({
+		name: '',
+		email: '',
+		mobile: '',
+		address: '',
+		gender: '',
+		myInfo: '',
+		profile: '',
+		profileImg: '',
+	});
+
+	const getMyInfo = async () => {
+		try {
+			const response = await myPageGet();
+			if (response) {
+				// API 응답에서 필요한 정보를 추출하여 state 업데이트
+				setUserInfo({
+					name: response.name || '',
+					email: response.email || '',
+					mobile: response.mobile || '',
+					address: response.address || '',
+					gender: response.gender || '',
+					myInfo: response.myInfo || '',
+					profile: response.profile || '',
+					profileImg: response.profileImg || '',
+				});
+				console.log('회원정보 불러오기:', response);
+			}
+		} catch (error) {
+			console.error(
+				'회원 정보를 불러오는 도중 오류가 발생했습니다.:',
+				error.message,
+			);
+		}
+	};
+
+	useEffect(() => {
+		getMyInfo(); // 컴포넌트가 마운트되면 사용자 정보 가져오기
+	}, []); // 빈 배열을 넣어 한 번만 실행되도록 설정
+
+	const putMyInfo = async (event) => {
+		try {
+			const response = await myPagePut(userInfo);
+			console.log('회원정보 변경하기', response);
+		} catch (error) {
+			console.log('회원정보를 변경하는 도중 오류가 발생했습니다.');
+		}
+	};
 
 	const saveImgFile = async () => {
 		try {
@@ -54,7 +105,15 @@ const User = () => {
 			const formData = new FormData();
 			formData.append('file', selectedFile);
 			const response = await uploadUser(formData);
-			console.log(response);
+			console.log('이미지 업로드 후 반환되는 URl값:', response);
+
+			setUserInfo((prevUserInfo) => ({
+				...prevUserInfo,
+				profileImg: response,
+			}));
+
+			console.log('유저 스테이트에 이미지 url 업로드 되는지 체크:', userInfo);
+			const putResponse = await putMyInfo(userInfo);
 			if (!response) return;
 
 			const reader = new FileReader();
@@ -71,6 +130,7 @@ const User = () => {
 	const [addressIsOpen, addressSetIsOpen] = useState(false);
 	const [telIsOpen, telSetIsOpen] = useState(false);
 	const [passwordIsOpen, passwordSetIsOpen] = useState(false);
+	const [myinfoIsOpen, myinfoSetIsOpen] = useState(false);
 
 	const passwordOnClickButton = () => {
 		passwordSetIsOpen(true);
@@ -88,6 +148,10 @@ const User = () => {
 		addressSetIsOpen(true);
 	};
 
+	const myinfoOnClickButton = () => {
+		myinfoSetIsOpen(true);
+	};
+
 	const logoutHandler = async () => {
 		try {
 			const response = await logoutUser();
@@ -99,6 +163,23 @@ const User = () => {
 		}
 	};
 
+	const updateMyInfo = async (newMyInfo) => {
+		try {
+			setUserInfo((prevUserInfo) => {
+				const updatedUserInfo = {
+					...prevUserInfo,
+					myInfo: newMyInfo,
+				};
+				console.log('업데이트된 사용자 정보:', updatedUserInfo);
+				return updatedUserInfo;
+			});
+			console.log('소개 변경후 상태 변경 체킹:', userInfo);
+			const response = await putMyInfo(userInfo);
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
 	return (
 		<UserWrapper>
 			<AccountDiv>ACCOUNT</AccountDiv>
@@ -107,7 +188,7 @@ const User = () => {
 					<UserItemDiv>
 						<ProfileImgDiv>
 							<ProfileImg
-								src={imgFile ? imgFile : `/assets/icons/icon-user.png`}
+								src={userInfo.profileImg || '/assets/icons/icon-user.png'}
 								alt=""
 								onClick={() => {
 									imgRef.current.click();
@@ -125,13 +206,33 @@ const User = () => {
 
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>e-mail</UserItemTitleDiv>
-							<UserItemContentDiv>asdasd@asdasd.com</UserItemContentDiv>
+							<UserItemContentDiv>{userInfo.email}</UserItemContentDiv>
 							<ModalDivHidden>change</ModalDivHidden>
+						</UserLeftItemDiv>
+						<UserLeftItemDiv>
+							<UserItemTitleDiv>my info</UserItemTitleDiv>
+							<UserItemContentDiv>
+								{userInfo.myInfo
+									? userInfo.myInfo
+									: '소개를 아직 입력하지 않았습니다.'}
+							</UserItemContentDiv>
+							<ModalDiv onClick={myinfoOnClickButton}>change</ModalDiv>
+							{myinfoIsOpen && (
+								<MyInfoModal
+									open={myinfoIsOpen}
+									onClose={() => {
+										myinfoSetIsOpen(false);
+									}}
+									updateMyInfo={updateMyInfo}
+								/>
+							)}
 						</UserLeftItemDiv>
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>address</UserItemTitleDiv>
 							<UserItemContentDiv>
-								대한민국 서울특별시 청와대 주소 123-456
+								{userInfo.address
+									? userInfo.address
+									: '주소를 아직 입력하지 않았습니다.'}
 							</UserItemContentDiv>
 							<ModalDiv onClick={addressOnClickButton}>change</ModalDiv>
 							{addressIsOpen && (
@@ -146,7 +247,7 @@ const User = () => {
 
 						<UserLeftItemDiv>
 							<UserItemTitleDiv>phone number</UserItemTitleDiv>
-							<UserItemContentDiv>010-000-00000</UserItemContentDiv>
+							<UserItemContentDiv>{userInfo.mobile}</UserItemContentDiv>
 							<ModalDiv onClick={telOnClickButton}>change</ModalDiv>
 							{telIsOpen && (
 								<TelChangeModal
@@ -174,7 +275,7 @@ const User = () => {
 					<UserItemDivRight>
 						<UserRightItemDiv>
 							<div>name</div>
-							<div>조영상</div>
+							<div>{userInfo.name}</div>
 						</UserRightItemDiv>
 						<UserRightItemDiv>
 							<div>성별</div>
