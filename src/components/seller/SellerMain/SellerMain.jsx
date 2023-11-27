@@ -10,8 +10,6 @@ const SellerMain = ({ onSubmit, onReset, isRegisterImage }) => {
 		setInputValue({ ...inputValue, [name]: files });
 	};
 
-	console.log(inputValue);
-
 	const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
 

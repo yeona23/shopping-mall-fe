@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+	deleteProduct,
 	getProducts,
 	getUserSellProducts,
 	updateDiscount,
@@ -45,10 +46,13 @@ const SellerList = () => {
 		);
 	};
 
-	const deleteProductHandler = (productId) => {
+	const deleteProductHandler = async (productId) => {
 		setSellerProductList(
 			sellerProductList.filter((product) => product.productId !== productId),
 		);
+
+		const response = await deleteProduct(productId);
+		console.log(response);
 	};
 
 	const updateDiscountAndStock = async (productId, newDiscount, newStock) => {

@@ -6,6 +6,7 @@ const USER_SELL = '/userSell';
 const IMAGE_UPLOAD = '/imgUpload';
 const STOCK_MODIFY = '/stockModify';
 const DISCOUNT = '/discount';
+const DELETE = '/delete';
 const BASE_URL = 'http://3.34.122.57:8080';
 
 const productMockApi = new ApiClient('/data');
@@ -50,4 +51,8 @@ export const updateDiscount = async (productId, discount) => {
 	return await productApi.post(DISCOUNT + `/${productId}`, {
 		discount: Number(discount),
 	});
+};
+
+export const deleteProduct = async (productId) => {
+	return await productApi.delete(DELETE + `/${productId}`);
 };
