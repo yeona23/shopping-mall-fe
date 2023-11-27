@@ -25,7 +25,7 @@ export const PageBtn = styled.div`
 	justify-content: center;
 	gap: 20px;
 
-	& div {
+	div {
 		width: 30px;
 		height: 30px;
 		display: flex;

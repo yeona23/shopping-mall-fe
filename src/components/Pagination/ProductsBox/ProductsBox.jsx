@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ItemBox, ProductList } from './ProductsBox.style';
 import PageButton from '../PageButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_PRODUCTS } from '../../../slice/productSlice';
 import { getProducts } from '../../../api/productApi';
 import { useNavigate } from 'react-router-dom';
+
+const PAGE_SIZE = 16;
 
 const ProductItem = ({ price, itemTitle, thumbnail, onClick }) => (
 	<ItemBox onClick={onClick}>
@@ -19,6 +21,8 @@ const ProductItem = ({ price, itemTitle, thumbnail, onClick }) => (
 const ProductsBox = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const fetchProductsData = async () => {
 		const response = await getProducts();
@@ -36,10 +40,21 @@ const ProductsBox = () => {
 		navigate(url);
 	};
 
+	const totalPages = Math.ceil(products.length / PAGE_SIZE);
+
+	const displayProducts = products.slice(
+		(currentPage - 1) * PAGE_SIZE,
+		currentPage * PAGE_SIZE,
+	);
+
+	const changePageHandler = (newPage) => {
+		setCurrentPage(newPage);
+	};
+
 	return (
 		<>
 			<ProductList>
-				{products.map((product) => (
+				{displayProducts.map((product) => (
 					<ProductItem
 						key={product.productId}
 						thumbnail={product.productImg[1]}
@@ -50,7 +65,11 @@ const ProductsBox = () => {
 					/>
 				))}
 			</ProductList>
-			<PageButton />
+			<PageButton
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPageChange={changePageHandler}
+			/>
 		</>
 	);
 };

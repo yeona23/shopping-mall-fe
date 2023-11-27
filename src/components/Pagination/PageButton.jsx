@@ -1,40 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PageBtn } from './Pagination.style';
 
-const PageButton = () => {
-	const PageCount = 5;
-	const [selectedPage, setSelectedPage] = useState(1);
+const PageButton = ({ currentPage, totalPages, onPageChange }) => {
+	const PageCount = totalPages;
 
 	const clickPageHandler = (pageNumber) => {
-		if (selectedPage === pageNumber) {
+		if (currentPage === pageNumber) {
 			return;
 		}
-		setSelectedPage(pageNumber);
+		onPageChange(pageNumber);
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
-	return (
-		<PageBtn>
-			{Array.from({ length: PageCount }, (_, index) => index + 1).map(
-				(pageNumber) => (
-					<div
-						key={pageNumber}
-						onClick={() => clickPageHandler(pageNumber)}
-						style={{
-							background:
-								selectedPage === pageNumber
-									? 'var(--color-palmoil)'
-									: 'initial',
-							color:
-								selectedPage === pageNumber
-									? 'var(--color-coconut)'
-									: 'initial',
-						}}>
-						{pageNumber}
-					</div>
-				),
-			)}
-		</PageBtn>
-	);
+	const generatePageButton = () => {
+		const buttons = [];
+		const startPage = Math.max(1, currentPage - Math.floor(PageCount / 2));
+		const endPage = Math.min(totalPages, startPage + PageCount - 1);
+
+		for (let i = startPage; i <= endPage; i++) {
+			buttons.push(
+				<div
+					key={i}
+					onClick={() => clickPageHandler(i)}
+					style={{
+						background: currentPage === i ? 'var(--color-palmoil)' : 'initial',
+						color: currentPage === i ? 'var(--color-coconut)' : 'initial',
+					}}>
+					{i}
+				</div>,
+			);
+		}
+		return buttons;
+	};
+
+	return <PageBtn>{generatePageButton()}</PageBtn>;
 };
 
 export default PageButton;
