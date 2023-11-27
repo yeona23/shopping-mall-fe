@@ -67,7 +67,6 @@ const User = () => {
 					profile: response.profile || '',
 					profileImg: response.profileImg || '',
 				});
-				console.log('회원정보 불러오기:', response);
 			}
 		} catch (error) {
 			console.error(
@@ -84,7 +83,6 @@ const User = () => {
 	const putMyInfo = async (event) => {
 		try {
 			const response = await myPagePut(userInfo);
-			console.log('회원정보 변경하기', response);
 		} catch (error) {
 			console.log('회원정보를 변경하는 도중 오류가 발생했습니다.');
 		}
@@ -170,10 +168,8 @@ const User = () => {
 					...prevUserInfo,
 					myInfo: newMyInfo,
 				};
-				console.log('업데이트된 사용자 정보:', updatedUserInfo);
 				return updatedUserInfo;
 			});
-			console.log('소개 변경후 상태 변경 체킹:', userInfo);
 			const response = await putMyInfo(userInfo);
 		} catch (error) {
 			console.error(error.message);
