@@ -64,6 +64,7 @@ const SubThemeBox = ({ dataTitle }) => {
 							thumbnail={product.productImg[1]}
 							itemTitle={product.name}
 							price={product.price}
+							type={product.category}
 							onClick={() => clickProductItem(product.productId)}
 						/>
 					))}

@@ -4,7 +4,7 @@ import PageButton from '../PageButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_PRODUCTS } from '../../../slice/productSlice';
 import { getProducts } from '../../../api/productApi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const PAGE_SIZE = 16;
 
@@ -21,6 +21,7 @@ const ProductItem = ({ price, itemTitle, thumbnail, onClick }) => (
 const ProductsBox = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { type, subType } = useParams();
 
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -39,6 +40,24 @@ const ProductsBox = () => {
 		const url = `/product/${product_id}`;
 		navigate(url);
 	};
+
+	const filteredProducts = products.filter((product) => {
+		const productType = product.category && product.category.toLowerCase();
+		const productSubCategory =
+			product.subCategory && product.subCategory.toLowerCase();
+
+		const productCategory = product.category && product.category.toLowerCase();
+
+		const isCategoryMatch = productCategory === 'outer';
+		const isTypeMatch = productType === (type ? type.toLowerCase() : '');
+		const isSubTypeMatch =
+			!subType ||
+			(productSubCategory && productSubCategory === subType.toLowerCase());
+		return isCategoryMatch && isTypeMatch && isSubTypeMatch;
+	});
+
+	console.log('products:', products);
+	console.log('filteredProducts:', filteredProducts);
 
 	const totalPages = Math.ceil(products.length / PAGE_SIZE);
 
@@ -60,6 +79,8 @@ const ProductsBox = () => {
 						thumbnail={product.productImg[1]}
 						index={product.index}
 						itemTitle={product.name}
+						type={product.type.toLowerCase()}
+						subType={product.subCategory}
 						price={product.price}
 						onClick={() => clickProductItem(product.productId)}
 					/>
